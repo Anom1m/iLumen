@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>ILumen Kino – Startseite</title>
+  <meta name="description" content="ILumen – Dein Kino. Aktuelle Filme, Spielzeiten, Tickets." />
+  <meta name="theme-color" content="#0A0A0C" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  
+ <header class="top">
+  <div class="container nav">
+    <a class="brand" href="#">
+      <img src="images/logo_mit_hintergrund.png" alt="ILumen Logo" class="logo" />
+    </a>
+    <nav class="navlinks" aria-label="Hauptnavigation">
+      <a href="#now">Aktuell</a>
+      <a href="#showtimes">Spielzeiten</a>
+      <a href="#locations">Standorte</a>
+      <a href="#prices">Preise</a>
+      <a href="#food">Gastronomie</a>
+    </nav>
+     <!--<a class="cta" href="#tickets">Tickets kaufen</a> -->
+  </div>
+</header>
+  <main class="container">
+    
+
+
+
+<!-- HERO -->
+<section class="hero" id="tickets">
+  <div class="hero-inner">
+    <div>
+      <h1>Erlebe Kino in <span style="color:var(--accent)">Premium-Atmosphäre</span></h1>
+      <p>Blockbuster, Originalversionen und Events – wähle Standort, Datum und sichere dir die besten Plätze.</p>
+      <div class="actions">
+        <a class="btn primary" href="#showtimes">Jetzt Tickets</a>
+        <a class="btn secondary" href="#trailer">Trailer ansehen</a>
+      </div>
+    </div>
+
+    <!-- Slideshow rechts -->
+    <div class="hero-slides">
+      <div class="slides" id="hero-slides"></div>
+      <div class="hero-info">
+        <h2 id="hero-title"></h2>
+        <p id="hero-meta"></p>
+      </div>
+      <div class="hero-timeline" id="hero-timeline"></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+    <!-- FILTER -->
+    <section class="filters" aria-label="Filter für Spielzeiten">
+  <div class="field">
+    <span class="muted">📍</span>
+    <select id="city">
+      <option value="">Alle Standorte</option>
+      <option>Berlin</option>
+      <option>Hamburg</option>
+      <option>München</option>
+      <option>Frankfurt</option>
+      <option>Dresden</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <span class="muted">📅</span>
+    <input type="date" id="date" />
+  </div>
+
+  <div class="field">
+    <span class="muted">🎞️</span>
+    <input id="q" type="search" placeholder="Filmtitel suchen…" />
+  </div>
+
+  <div class="field action">
+    <button class="btn primary" id="apply">Filtern</button>
+  </div>
+</section>
+
+    <!-- NOW PLAYING -->
+    <section id="now">
+      <div class="section-head">
+        <h2>Jetzt im Programm</h2>
+        <span class="muted">OV, 3D &amp; D-BOX verfügbar</span>
+      </div>
+      <div class="grid" id="movie-grid"></div>
+    </section>
+
+    <!-- SHOWTIMES -->
+    <section id="showtimes">
+      <div class="section-head">
+        <h2>Spielzeiten heute</h2>
+        <span class="muted" id="result-count">—</span>
+      </div>
+      <div class="grid" id="showtime-grid"></div>
+    </section>
+
+    <!-- LOCATIONS & PRICES -->
+    <section class="cards" id="locations">
+      <div class="panel">
+        <h3 style="margin:6px 0 12px">Unsere Standorte</h3>
+        <div class="list">
+          <div class="row"><strong>Berlin – Potsdamer Platz</strong><span>IMAX • Dolby Atmos • Lounge</span></div>
+          <div class="row"><strong>Hamburg – HafenCity</strong><span>ScreenX • Premium Seats</span></div>
+          <div class="row"><strong>München – City</strong><span>OV-Woche • Sneak Preview</span></div>
+          <div class="row"><strong>Dresden – Altmarkt</strong><span>Familienkino • 3D</span></div>
+        </div>
+      </div>
+      <div class="panel" id="prices">
+        <h3 style="margin:6px 0 12px">Preise</h3>
+        <div class="list">
+          <div class="row"><span>Standard</span><strong>11,50&nbsp;€</strong></div>
+          <div class="row"><span>Premium / Loge</span><strong>14,90&nbsp;€</strong></div>
+          <div class="row"><span>3D-Zuschlag</span><strong>+3,00&nbsp;€</strong></div>
+          <div class="row"><span>Schüler/Studierende (mit Ausweis)</span><strong>9,90&nbsp;€</strong></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div>
+        <div class="brand"><span class="badge">🎬</span><span>ILumen</span></div>
+        <p class="muted">Dein Kinoerlebnis mit Top-Bild, sattem Sound und bequemen Sitzen.</p>
+      </div>
+      <div>
+        <strong>Programm</strong><br/>
+        <a href="#now">Now</a><br/>
+        <a href="#showtimes">Spielzeiten</a><br/>
+        <a href="#">Highlights</a>
+      </div>
+      <div>
+        <strong>Service</strong><br/>
+        <a href="#">Gutscheine</a><br/>
+        <a href="#">Barrierefreiheit</a><br/>
+        <a href="#">Kontakt</a>
+      </div>
+      <div>
+        <strong>Rechtliches</strong><br/>
+        <a href="#">AGB</a><br/>
+        <a href="#">Datenschutz</a><br/>
+        <a href="#">Impressum</a>
+      </div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> ILumen GmbH. Alle Rechte vorbehalten.</div>
+  </footer>
+
+ <script src="app.js"></script> 
+</body>
+</html>
