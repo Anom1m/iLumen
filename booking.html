@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sitzplatzbuchung – ILumen Kino</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+  <header class="top">
+    <div class="container nav">
+      <a class="brand" href="index.html">ILumen</a>
+    </div>
+  </header>
+
+  <main class="container booking">
+    <h1>Sitzplatz wählen</h1>
+    <p>Film: <span id="movieTitle">–</span> | Vorstellung: <span id="showTime">–</span></p>
+
+    <!-- Leinwand -->
+<!-- Leinwand -->
+<div class="screen">Leinwand</div>
+
+    <!-- Sitzraster -->
+    <div class="seat-map" id="seatMap"></div>
+
+    <!-- Legende -->
+    <div class="legend">
+      <span class="seat"></span> Frei
+      <span class="seat selected"></span> Ausgewählt
+      <span class="seat occupied"></span> Belegt
+    </div>
+
+    <!-- Auswahl -->
+<div class="summary">
+  <p>Ausgewählte Plätze: <span id="selectedSeats">keine</span></p>
+  
+  <label for="priceType">Preiskategorie:</label>
+  <select id="priceType">
+    <option value="11.5">Standard – 11,50 €</option>
+    <option value="14.9">Premium / Loge – 14,90 €</option>
+    <option value="9.9">Schüler / Studierende – 9,90 €</option>
+  </select>
+
+  <label>
+    <input type="checkbox" id="is3D"> 3D-Zuschlag (+3,00 €)
+  </label>
+
+  <p>Gesamt: <span id="totalPrice">0,00 €</span></p>
+  <button class="btn primary" id="checkout">Weiter zur Zahlung</button>
+</div>
+
+  </main>
+
+  <script src="booking.js"></script>
+</body>
+</html>

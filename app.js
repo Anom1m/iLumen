@@ -5,7 +5,7 @@ const MOVIES = [
     title: 'Neon Nights',
     rating: 'FSK 12', dur: 122,
     genres: ['Thriller','Action','Crime'],
-    poster: 'https://images.pexels.com/photos/30135207/pexels-photo-30135207.jpeg?cs=srgb&dl=pexels-jesserphotonyc-30135207.jpg&fm=jpg',
+    poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmiLd5UAeJ8629mWZNdQUCmk0MAzx-Mc-JFA&s',
     times: ['12:30','15:15','18:00','20:45'],
     soldOut: ['18:00']
   },
@@ -48,7 +48,6 @@ const MOVIES = [
     times: ['15:45','19:00','21:45'],
     soldOut: ['21:45']
   },
-
   {
     id: 'm6',
     title: 'Midnight Horizon',
@@ -101,6 +100,34 @@ const MOVIES = [
   }
 ];
 
+// --- COMING SOON (nur für Slideshow) ---
+const COMING_SOON = [
+  {
+    id: 'u1',
+    title: 'Aurora Rising',
+    rating: 'FSK 12', dur: 119,
+    genres: ['Sci-Fi','Drama'],
+    release: '2025-10-18',
+    poster: 'https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg'
+  },
+  {
+    id: 'u2',
+    title: 'Velvet Storm',
+    rating: 'FSK 16', dur: 128,
+    genres: ['Action','Thriller'],
+    release: '2025-11-02',
+    poster: 'https://images.pexels.com/photos/799137/pexels-photo-799137.jpeg'
+  },
+  {
+    id: 'u3',
+    title: 'Echoes of Eden',
+    rating: 'FSK 6', dur: 101,
+    genres: ['Abenteuer','Familie'],
+    release: '2025-12-05',
+    poster: 'https://images.pexels.com/photos/1118869/pexels-photo-1118869.jpeg'
+  }
+];
+
 // Elemente
 const grid = document.getElementById('movie-grid');
 const showGrid = document.getElementById('showtime-grid');
@@ -119,11 +146,28 @@ dateInp.value = todayISO;
 function createMovieCard(m){
   const el = document.createElement('article');
   el.className = 'card';
+
   const poster = document.createElement('div');
   poster.className = 'poster';
   poster.style.backgroundImage = `url('${m.poster}')`;
   poster.role = 'img';
   poster.ariaLabel = `${m.title} Poster`;
+
+  // Overlay + Button für "Mehr Infos"
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+  const btn = document.createElement("button");
+  btn.className = "btn-info";
+  btn.textContent = "Mehr Infos";
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    window.location.href = `film.html?id=${m.id}`;
+  });
+  overlay.appendChild(btn);
+
+  el.appendChild(poster);
+  el.appendChild(overlay);
+
   const body = document.createElement('div');
   body.className = 'card-body';
   body.innerHTML = `
@@ -131,7 +175,7 @@ function createMovieCard(m){
     <div class="meta">${m.rating} • ${m.dur} Min</div>
     <div class="chips">${m.genres.map(g=>`<span class="chip">${g}</span>`).join('')}</div>
   `;
-  el.append(poster, body);
+  el.append(body);
   return el;
 }
 
@@ -178,29 +222,29 @@ function render(){
 applyBtn.addEventListener('click', render);
 qInp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') render(); });
 
-// Ticket-Click
+// Klick auf Spielzeit -> nur Film-Info öffnen
 showGrid.addEventListener('click', (e)=>{
   const btn = e.target.closest('.time');
   if(!btn || btn.disabled) return;
-  const time = btn.dataset.time;
-  const movie = MOVIES.find(x=>x.id===btn.dataset.movie);
-  alert(`Tickets für "${movie.title}" um ${time} – Platzwahl im nächsten Schritt.`);
+  const movieId = btn.dataset.movie;
+  window.location.href = `film.html?id=${movieId}`;
 });
 
 // Initiale Darstellung
 render();
 
+// Header-Scroll
 const header = document.querySelector("header.top");
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 350) {      // ab 350px Scrolltiefe
-    header.style.transform = "translateY(-100%)"; // nach oben raus
+  if (window.scrollY > 350) {
+    header.style.transform = "translateY(-100%)";
   } else {
-    header.style.transform = "translateY(0)";     // wieder sichtbar
+    header.style.transform = "translateY(0)";
   }
 });
 
 // --- Hero Slideshow ---
-const heroMovies = MOVIES.slice(0, 3); 
+const heroMovies = COMING_SOON;
 const slidesContainer = document.querySelector(".slides");
 const heroTitle = document.getElementById("hero-title");
 const heroMeta  = document.getElementById("hero-meta");
@@ -215,14 +259,12 @@ heroMovies.forEach((m, i) => {
   slide.className = "hero-slide" + (i === 0 ? " active" : "");
   slide.style.backgroundImage = `url('${m.poster}')`;
 
-  // Ganze Bannerfläche klickbar
   slide.addEventListener("click", () => {
     window.location.href = `film.html?id=${m.id}`;
   });
 
   slidesContainer.appendChild(slide);
 
-  // Timeline-Bar
   const bar = document.createElement("div");
   bar.className = "bar";
 
@@ -237,14 +279,12 @@ heroMovies.forEach((m, i) => {
   heroTimeline.appendChild(bar);
 });
 
-// Infos anzeigen
 function showHeroInfo(index) {
   const m = heroMovies[index];
-  heroTitle.textContent = m.title;
+  heroTitle.innerHTML = `<span class="badge-upcoming">Demnächst</span><br/>${m.title}`;
   heroMeta.textContent  = `${m.rating} • ${m.dur} Min • ${m.genres.join(", ")}`;
 }
 
-// Nur Marker resetten
 function resetTimeline() {
   document.querySelectorAll(".hero-timeline .marker").forEach(el => {
     el.style.transition = "none";
@@ -252,16 +292,14 @@ function resetTimeline() {
   });
 }
 
-// Alle Bars hart resetten (inkl. Fill) + Reflow erzwingen
 function clearAllBars() {
   document.querySelectorAll(".hero-timeline .fill, .hero-timeline .marker").forEach(el => {
     el.style.transition = "none";
     el.style.width = "0%";
   });
-  void document.body.offsetHeight; // Reflow
+  void document.body.offsetHeight;
 }
 
-// Startet Fill + Marker neu
 function startTimeline(index) {
   const bar = document.querySelectorAll(".hero-timeline .bar")[index];
   if (!bar) return;
@@ -269,28 +307,24 @@ function startTimeline(index) {
   const fill = bar.querySelector(".fill");
   const marker = bar.querySelector(".marker");
 
-  // Reset auf 0
   fill.style.transition = "none";
   marker.style.transition = "none";
   fill.style.width = "0%";
   marker.style.width = "0%";
 
-  void fill.offsetWidth; // Reflow erzwingen
+  void fill.offsetWidth;
 
-  // Jetzt animieren
   requestAnimationFrame(() => {
     fill.style.transition = `width ${intervalTime}ms linear`;
     marker.style.transition = `width ${intervalTime}ms linear`;
-    fill.style.width = "100%";   // Rot wächst
-    marker.style.width = "100%"; // Weißer Marker läuft drüber
+    fill.style.width = "100%";
+    marker.style.width = "100%";
   });
 }
 
-// Initial
 showHeroInfo(currentSlide);
 startTimeline(currentSlide);
 
-// Loop
 setInterval(() => {
   const slides = document.querySelectorAll(".hero-slide");
   slides[currentSlide]?.classList.remove("active");
@@ -298,7 +332,6 @@ setInterval(() => {
   const next = (currentSlide + 1) % heroMovies.length;
   currentSlide = next;
 
-  // Wenn alle Slides durch → alles resetten
   if (currentSlide === 0) {
     clearAllBars();
   }

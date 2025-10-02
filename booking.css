@@ -1,0 +1,75 @@
+.booking h1 {margin:20px 0; color:var(--accent);}
+
+/* Leinwand wie am Anfang */
+.screen {
+  background: linear-gradient(to bottom, #999, #666);
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  margin: 30px auto;
+  width: 90%;
+  box-shadow: 0 6px 20px rgba(0,0,0,.5) inset;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.seat-map {
+  display:grid;
+  gap:6px;
+  justify-content:center;
+  grid-template-columns: repeat(18, 28px); /* mehr Sitze */
+  margin:60px 0 20px ;
+}
+.seat {
+  width:28px; height:28px; border-radius:6px;
+  background:var(--panel-2); cursor:pointer;
+  border:1px solid rgba(255,255,255,.1);
+  transition:all 0.2s ease;
+}
+.seat:hover {transform:scale(1.1);}
+.seat.selected {background:var(--accent);}
+.seat.occupied {background:#444; cursor:not-allowed;}
+
+/* Premium-Sitze */
+.seat.premium {
+  background: linear-gradient(145deg, #a4161a, #d62828);
+  border:2px solid #ff9a9a;
+  box-shadow:0 0 8px rgba(214,40,40,0.8);
+}
+.seat.premium.selected {
+  background:#ff4d4d;
+  border-color:#fff;
+  box-shadow:0 0 12px rgba(255,80,80,1);
+}
+.seat.premium.occupied {
+  background:#662222;
+  border-color:#444;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+
+.legend {display:flex; gap:14px; margin:10px 0; color:var(--muted);}
+.summary {margin-top:20px;}
+
+.booking {
+  padding-bottom: 60px; /* mehr Abstand zum Seitenende */
+}
+
+.summary select {
+  display: block;
+  margin: 8px 0 16px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.2);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 1rem;
+}
+.summary label {
+  display:block;
+  margin:8px 0;
+  color:var(--muted);
+}
+.summary input[type="checkbox"] {
+  margin-right:6px;
+}
