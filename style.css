@@ -228,3 +228,20 @@ footer{margin-top:40px; border-top:1px solid rgba(255,255,255,.06);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+
+
+/* Logo im Header anpassen */
+.logo {
+  height: 30px;        /* Höhe des Logos */
+  width: auto;         /* Breite automatisch skalieren */
+  object-fit: contain; /* Proportionen beibehalten */
+}
+
+
+/* Footer-Logo */
+.footer-logo-img {
+  height: 30px;           /* Größe anpassen */
+  width: auto;
+  object-fit: contain;
+}
+

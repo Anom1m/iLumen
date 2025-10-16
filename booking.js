@@ -118,3 +118,14 @@ document.getElementById("checkout").addEventListener("click", ()=>{
     return `Reihe ${rowToLetter(r)}, Platz ${c}`;
   }).join(", ")}`);
 });
+
+
+// Header-Scroll
+const header = document.querySelector("header.top");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 100) {
+    header.style.transform = "translateY(-100%)";
+  } else {
+    header.style.transform = "translateY(0)";
+  }
+});
