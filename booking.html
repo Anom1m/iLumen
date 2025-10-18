@@ -1,59 +1,141 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sitzplatzbuchung – ILumen Kino</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="booking.css" />
 </head>
 <body>
- 
+  <!-- Header -->
   <header class="top">
     <div class="container nav">
-      <a class="brand" href="index.html">ILumen</a>
+      <a class="brand" href="index.html" aria-label="Zur Startseite">
+        <img src="images/2_ohne.png" alt="ILumen Logo" class="logo" />
+      </a>
+      <nav class="navlinks" aria-label="Hauptnavigation">
+        <a href="index.html#now">Aktuell</a>
+        <a href="index.html#showtimes">Spielzeiten</a>
+        <a href="index.html#locations">Standorte</a>
+        <a href="index.html#prices">Preise</a>
+      </nav>
     </div>
   </header>
 
+  <!-- Main -->
   <main class="container booking">
     <h1>Sitzplatz wählen</h1>
-    <p>Film: <span id="movieTitle">–</span> | Vorstellung: <span id="showTime">–</span></p>
+    <p class="muted">
+      Film: <span id="movieTitle">—</span> ·
+      Vorstellung: <span id="showTime">—</span> ·
+      Standort: <span id="cityName">—</span> ·
+      Datum: <span id="showDate">—</span>
+    </p>
 
-    <!-- Leinwand -->
-<!-- Leinwand -->
-<div class="screen">Leinwand</div>
+    <section class="booking-layout">
+      <!-- Saal (linke Spalte) -->
+      <div class="hall">
+        <div class="screen">Leinwand</div>
+        <div class="seat-rows" id="seatRows"></div>
 
-    <!-- Sitzraster -->
-    <div class="seat-map" id="seatMap"></div>
+        <!-- Legende bleibt links unter den Sitzen -->
+        <div class="legend">
+          <div class="legend-item legend-free">
+            <div class="legend-box"></div> Frei
+          </div>
+          <div class="legend-item legend-sel">
+            <div class="legend-box"></div> Ausgewählt
+          </div>
+          <div class="legend-item legend-occ">
+            <div class="legend-box"></div> Belegt
+          </div>
+          <div class="legend-item legend-prem">
+            <div class="legend-box"></div> Premium
+          </div>
+        </div>
+      </div><!-- /hall -->
 
-    <!-- Legende -->
-    <div class="legend">
-      <span class="seat"></span> Frei
-      <span class="seat selected"></span> Ausgewählt
-      <span class="seat occupied"></span> Belegt
-    </div>
+      <!-- Ticketvorschau / Zusammenfassung (rechte Spalte) -->
+      <aside class="checkout-card">
+        <div class="ticket-head">
+          <div class="ticket-cover">
+            <img id="ticketPoster" alt="Filmposter" referrerpolicy="no-referrer" />
+          </div>
+          <div class="ticket-info">
+            <div class="ticket-title" id="ticketTitle">—</div>
+            <div class="ticket-meta">
+              <span id="ticketCity">—</span> · <span id="ticketDate">—</span> · <span id="ticketTime">—</span>
+            </div>
+          </div>
+        </div>
 
-    <!-- Auswahl -->
-<div class="summary">
-  <p>Ausgewählte Plätze: <span id="selectedSeats">keine</span></p>
-  
-  <label for="priceType">Preiskategorie:</label>
-  <select id="priceType">
-    <option value="11.5">Standard – 11,50 €</option>
-    <option value="14.9">Premium / Loge – 14,90 €</option>
-    <option value="9.9">Schüler / Studierende – 9,90 €</option>
-  </select>
+        <div class="divider"></div>
 
-  <label>
-    <input type="checkbox" id="is3D"> 3D-Zuschlag (+3,00 €)
-  </label>
+        <div class="selection">
+          <div class="selection-row">
+            <span class="muted">Ausgewählte Plätze</span>
+            <strong id="selectedSeats">keine</strong>
+          </div>
 
-  <p>Gesamt: <span id="totalPrice">0,00 €</span></p>
-  <button class="btn primary" id="checkout">Weiter zur Zahlung</button>
-</div>
+          <label class="toggle-3d">
+            <input type="checkbox" id="is3D" />
+            3D-Zuschlag (+3,00 € pro Sitz)
+          </label>
 
+          <div class="small muted" id="priceHint">
+            Standard: 11,50 € · Premium/Loge: 14,90 €
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="price-block">
+          <div class="price-row"><span>Zwischensumme</span><strong id="subtotal">0,00 €</strong></div>
+          <div class="price-row"><span>3D-Zuschlag</span><strong id="surcharge3d">0,00 €</strong></div>
+          <div class="price-row total"><span>Gesamt</span><strong id="totalPrice">0,00 €</strong></div>
+        </div>
+
+        <button class="btn primary" id="checkout">Weiter zur Zahlung</button>
+      </aside>
+    </section>
   </main>
 
   <script src="booking.js"></script>
+
+<footer>
+    <div class="container foot">
+      <div>
+        
+        <div class="brand footer-logo">
+  <img src="images/2_ohne.png" alt="ILumen Logo" class="footer-logo-img" />
+    </div>
+       
+       
+       
+        <p class="muted">Dein Kinoerlebnis mit Top-Bild, sattem Sound und bequemen Sitzen.</p>
+      </div>
+      <div>
+        <strong>Programm</strong><br/>
+        <a href="#now">Now</a><br/>
+        <a href="#showtimes">Spielzeiten</a><br/>
+        <a href="#">Highlights</a>
+      </div>
+      <div>
+        <strong>Service</strong><br/>
+        <a href="#">Gutscheine</a><br/>
+        <a href="#">Barrierefreiheit</a><br/>
+        <a href="#">Kontakt</a>
+      </div>
+      <div>
+        <strong>Rechtliches</strong><br/>
+        <a href="#">AGB</a><br/>
+        <a href="#">Datenschutz</a><br/>
+        <a href="#">Impressum</a>
+      </div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> ILumen GmbH. Alle Rechte vorbehalten.</div>
+  </footer>
+
 </body>
 </html>

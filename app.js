@@ -1,8 +1,8 @@
-// --- Dummy-Daten ---
+// --- Dummy-Daten (Poster aktualisiert) ---
 const MOVIES = [
   {
     id: 'm1',
-    title: 'Neon Nights',
+    title: 'Dark Nights',
     rating: 'FSK 12', dur: 122,
     genres: ['Thriller','Action','Crime'],
     poster: 'https://wallpapers.com/images/hd/mysterious-noir-detective-smoking-in-foggy-alley-p5sg0z8slwalzjuj.jpg',
@@ -100,31 +100,34 @@ const MOVIES = [
   }
 ];
 
+// 🔸 Filme für die Booking-Seite verfügbar machen
+try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
+
 // --- COMING SOON (nur für Slideshow) ---
 const COMING_SOON = [
   {
     id: 'u1',
-    title: 'Aurora Rising',
+    title: 'Interstellar',
     rating: 'FSK 12', dur: 119,
     genres: ['Sci-Fi','Drama'],
     release: '2025-10-18',
-    poster: 'https://images.pexels.com/photos/713149/pexels-photo-713149.jpeg'
+    poster: 'https://getwallpapers.com/wallpaper/full/6/2/e/1267879-movie-poster-wallpaper-1920x1080-for-hd.jpg'
   },
   {
     id: 'u2',
-    title: 'Velvet Storm',
+    title: 'Race',
     rating: 'FSK 16', dur: 128,
-    genres: ['Action','Thriller'],
+    genres: ['Action','Romantik'],
     release: '2025-11-02',
-    poster: 'https://images.pexels.com/photos/799137/pexels-photo-799137.jpeg'
+    poster: 'https://4kwallpapers.com/images/wallpapers/f1-the-movie-8k-3840x2160-22458.jpg'
   },
   {
     id: 'u3',
-    title: 'Echoes of Eden',
+    title: 'The Mission',
     rating: 'FSK 6', dur: 101,
-    genres: ['Abenteuer','Familie'],
+    genres: ['Action','Thriller'],
     release: '2025-12-05',
-    poster: 'https://images.pexels.com/photos/1118869/pexels-photo-1118869.jpeg'
+    poster: 'https://www.zastavki.com/pictures/originals/2023/Movies_Poster_for_the_new_movie_Mission_Impossible__Deadly_Reckoning._Part_1_161924_.jpg'
   }
 ];
 
@@ -222,12 +225,18 @@ function render(){
 applyBtn.addEventListener('click', render);
 qInp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') render(); });
 
-// Klick auf Spielzeit -> nur Film-Info öffnen
+// Klick auf Spielzeit -> 🔸 Booking-Seite (Film, City, Datum übernehmen)
 showGrid.addEventListener('click', (e)=>{
   const btn = e.target.closest('.time');
   if(!btn || btn.disabled) return;
   const movieId = btn.dataset.movie;
-  window.location.href = `film.html?id=${movieId}`;
+  const time = btn.dataset.time;
+  const movie = MOVIES.find(m => m.id === movieId);
+  const city = citySel.value || (movie?.cities?.[0] || '');
+  const date = dateInp.value || todayISO;
+  // include movietitle as a fallback (used when localStorage isn't available)
+  const url = `booking.html?movie=${encodeURIComponent(movieId)}&movietitle=${encodeURIComponent(movie?.title||'')}&moviePoster=${encodeURIComponent(movie?.poster||'')}&time=${encodeURIComponent(time)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}`;
+  window.location.href = url;
 });
 
 // Initiale Darstellung
