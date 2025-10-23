@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Gastronomie</title>
+  <link rel="stylesheet" href="style.css">
+
+  <header class="top">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="images/2_ohne.png" alt="ILumen Logo" class="logo" />
+    </a>
+    <nav class="navlinks" aria-label="Hauptnavigation">
+      <a href="#now">Aktuell</a>
+      <a href="#showtimes">Heute im Programm</a>
+      <a href="#locations">Standorte</a>
+      <a href="#prices">Preise</a>
+      <a href="#food">Gastronomie</a>
+    </nav>
+  </div>
+</header>
+  <style>
+    .gastronomie-section {
+      max-width: var(--max);
+      margin: 40px auto;
+      padding: 20px;
+      background: var(--panel);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .gastronomie-section h1 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .category-title {
+      color: #fff;
+      font-size: 1.6rem;
+      margin: 40px 0 20px;
+      border-bottom: 2px solid var(--accent, #d02828);
+      padding-bottom: 6px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .menu-item {
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 16px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .menu-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .menu-item h2 {
+      font-size: 1.2rem;
+      margin: 10px 0 6px;
+    }
+
+    .menu-item p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .pdf-download {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .pdf-download a {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--accent, #d02828);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    .pdf-download a:hover {
+      background: #a02020;
+    }
+  </style>
+</head>
+<body>
+  <div class="gastronomie-section">
+    <h1>Unsere Gastronomie-Angebote</h1>
+
+<!-- Popcorn & Nachos -->
+<h2 class="category-title">Popcorn & Nachos</h2>
+<div class="menu-grid" style="grid-template-columns: repeat(2, 1fr);">
+  <div class="menu-item">
+    <img src="images/popcorn.jpg" alt="Popcorn" style="width:100%; max-width:220px; margin:auto;">
+    <h2>Popcorn</h2>
+    <p>
+      Klein: 3,50 €<br>
+      Groß: 5,50 €<br>
+      Karamell: 6,00 €<br>
+    </p>
+  </div>
+  <div class="menu-item">
+    <img src="images/nacho.jpg" alt="Nachos" style="width:100%; max-width:220px; margin:auto;">
+    <h2>Nachos</h2>
+    <p>
+      Nachos (Klein) mit 3 Dips: 3,00 €<br>
+      Nachos (Groß) mit 3 Dips: 4,50 €
+    </p>
+  </div>
+</div>
+
+
+<!-- 🥤 Getränke -->
+<h2 class="category-title">Getränke</h2>
+<div class="menu-grid">
+  <div class="menu-item">
+    <img src="images/softdrink.jpg" alt="Getränke" style="width:100%; max-width:220px; margin:auto;">
+    <h2>Getränke</h2>
+    <p>
+      Softdrink (0,5 l): 3,00 €<br>
+      Softdrink (0,75 l): 4,00 €<br>
+      Wasser (0,5 l): 2,50 €<br>
+    </p>
+  </div>
+</div>
+
+
+<!-- Menüs -->
+<h2 class="category-title">Menüs</h2>
+<div class="menu-grid" style="grid-template-columns: repeat(3, 1fr);">
+  <!-- Popcorn-Menüs -->
+  <div class="menu-item">
+    <img src="images/menue.jpg" alt="Popcorn-Menü" style="width:100%; max-width:220px; margin:auto;">
+    <h2>Popcorn-Menüs</h2>
+    <p>
+      Kleines Popcorn + Kleiner Softdrink: 6 €<br>
+      Großes Popcorn + Kleiner Softdrink: 8 €<br>
+      Großes Popcorn + Großer Softdrink: 9 €<br>
+      (Bei extra Wünschen sind Aufpreise möglich)
+	
+    </p>
+  </div>
+
+  <!-- Nacho-Menüs -->
+  <div class="menu-item">
+    <img src="images/nacho_menue.jpg" alt="Nacho-Menü" style="width:100%; max-width:220px; margin:auto;">
+    <h2>Nacho-Menüs</h2>
+    <p>
+      Kleine Nachos + Kleiner Softdrink: 5 €<br>
+      Große Nachos + Kleiner Softdrink: 7 €<br>
+      Große Nachos + Großer Softdrink: 8 €
+    </p>
+  </div>
+
+  <!-- Weitere Menüs -->
+  <div class="menu-item">
+    <h2>Für den großen Hunger</h2>
+    <p>
+      Burger + Getränk<br>
+      Veggie-Menü<br>
+      Familienmenü
+    </p>
+  </div>
+</div>
+
+
+    <!-- Snacks -->
+    <h2 class="category-title">Snacks</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h2>Snacks</h2>
+        <p>Schokoriegel<br>Gummibärchen<br>Chips</p>
+      </div>
+    </div>
+
+    <!-- Heiße Getränke -->
+    <h2 class="category-title">Heiße Getränke</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <h2>Heißgetränke</h2>
+        <p>Kaffee<br>Cappuccino<br>Espresso</p>
+      </div>
+    </div>
+
+    <!-- PDF Download -->
+    <div class="pdf-download">
+      <a href="speisekarte.pdf" download>📎 Speisekarte als PDF herunterladen</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container foot">
+      <div>
+        
+        <div class="brand footer-logo">
+  <img src="images/2_ohne.png" alt="ILumen Logo" class="footer-logo-img" />
+    </div>
+       
+       
+       
+        <p class="muted">Dein Kinoerlebnis mit Top-Bild, sattem Sound und bequemen Sitzen.</p>
+      </div>
+      <div>
+        <strong>Programm</strong><br/>
+        <a href="#now">Now</a><br/>
+        <a href="#showtimes">Spielzeiten</a><br/>
+        <a href="#">Highlights</a>
+      </div>
+      <div>
+        <strong>Service</strong><br/>
+        <a href="#">Gutscheine</a><br/>
+        <a href="#">Barrierefreiheit</a><br/>
+        <a href="#">Kontakt</a>
+      </div>
+      <div>
+        <strong>Rechtliches</strong><br/>
+        <a href="#">AGB</a><br/>
+        <a href="#">Datenschutz</a><br/>
+        <a href="#">Impressum</a>
+      </div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> ILumen GmbH. Alle Rechte vorbehalten.</div>
+  </footer>
+</body>
+</html>
+

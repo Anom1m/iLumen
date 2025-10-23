@@ -121,16 +121,7 @@ return label; // Zusatz "(Premium)" nicht anzeigen – im Mock war es clean
 }
 updateSummary();
 
-// Checkout
-document.getElementById("checkout").addEventListener("click", () => {
-  if (!selected.length) return alert("Bitte mindestens einen Sitz auswählen!");
-  const { total } = calcPrices();
-  const sitze = selected.map(p => {
-    const [r,c] = p.split("-").map(Number);
-    return `Reihe ${rowToLetter(r)}, Platz ${c}${isPremium(p) ? " (Premium)" : ""}`;
-  }).join(", ");
-  alert(`Du hast ${sitze}\nGesamt: ${total.toFixed(2).replace(".", ",")} €${is3DEl.checked ? " (inkl. 3D-Zuschlag)" : ""}`);
-});
+
 
 // Header-Scroll
 const header = document.querySelector("header.top");
@@ -171,3 +162,31 @@ function renderSelectedSeatsList(selectedSeatLabels){
     list.appendChild(li);
   }
 }
+
+document.getElementById('checkout').addEventListener('click', () => {
+  // Sammle die nötigen Daten aus deiner bestehenden State/UI:
+  const movieTitle = document.getElementById('ticketTitle')?.textContent?.trim() || '—';
+  const poster = document.getElementById('ticketPoster')?.getAttribute('src') || '';
+  const city = document.getElementById('ticketCity')?.textContent?.trim() || '—';
+  const date = document.getElementById('ticketDate')?.textContent?.trim() || '—';
+  const time = document.getElementById('ticketTime')?.textContent?.trim() || '—';
+  const is3D = document.getElementById('is3D')?.checked || false;
+
+  // Build readable seat labels from the internal `selected` array (e.g. H14)
+  const seats = selected.map(pos => {
+    const [r,c] = pos.split('-').map(Number);
+    const label = `${rowToLetter(r)}${c}`;
+    return label;
+  });
+
+  // Hole vorhandene Zahlen aus deiner Preislogik
+  const subtotal   = parseFloat((document.getElementById('subtotal')?.textContent||'0').replace(/[^\d,.-]/g,'').replace(',','.')) || 0;
+  const surcharge3d= parseFloat((document.getElementById('surcharge3d')?.textContent||'0').replace(/[^\d,.-]/g,'').replace(',','.')) || 0;
+  const total      = parseFloat((document.getElementById('totalPrice')?.textContent||'0').replace(/[^\d,.-]/g,'').replace(',','.')) || 0;
+
+  const order = { movieTitle, poster, city, date, time, seats, is3D, prices:{ subtotal, surcharge3d, total } };
+  try { sessionStorage.setItem('ilumenOrder', JSON.stringify(order)); } catch(e){}
+
+  // Weiter zur Kasse
+  window.location.href = 'checkout.html';
+});

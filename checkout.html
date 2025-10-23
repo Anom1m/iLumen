@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout – ILumen Kino</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="checkout.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="top">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="Zur Startseite">
+        <img src="images/2_ohne.png" alt="ILumen Logo" class="logo" />
+      </a>
+      <nav class="navlinks" aria-label="Hauptnavigation">
+        <a href="index.html#now">Aktuell</a>
+        <a href="index.html#showtimes">Spielzeiten</a>
+        <a href="index.html#locations">Standorte</a>
+        <a href="index.html#prices">Preise</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container checkout">
+    <h1>Checkout</h1>
+    <p class="muted">Prüfe deine Buchung und wähle eine Zahlungsmethode.</p>
+
+    <section class="checkout-grid">
+      <!-- Linke Spalte: Zahlung -->
+      <form id="payForm" class="pay-card" novalidate>
+        <h2>Zahlung</h2>
+
+        <fieldset class="pmethods">
+          <legend class="sr-only">Zahlungsart</legend>
+
+          <label class="pmethod">
+            <input type="radio" name="pmethod" value="card" checked>
+            <span>Kredit-/Debitkarte</span>
+          </label>
+          <label class="pmethod">
+            <input type="radio" name="pmethod" value="paypal">
+            <span>PayPal</span>
+          </label>
+          <label class="pmethod">
+            <input type="radio" name="pmethod" value="sepa">
+            <span>SEPA-Lastschrift</span>
+          </label>
+        </fieldset>
+
+        <!-- Kartenformular -->
+        <div id="cardForm" class="pmethod-panel">
+          <div class="row">
+            <label>Inhaber*in
+              <input type="text" id="cardName" autocomplete="cc-name" placeholder="Max Mustermann" required>
+            </label>
+          </div>
+          <div class="row two">
+            <label>Kartennummer
+              <input type="text" id="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" required maxlength="19">
+            </label>
+            <label>Gültig bis (MM/YY)
+              <input type="text" id="cardExp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" required maxlength="5">
+            </label>
+            <label>CVC
+              <input type="text" id="cardCvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123" required maxlength="4">
+            </label>
+          </div>
+          <div class="row">
+            <label>E-Mail für Tickets
+              <input type="email" id="buyerEmail" autocomplete="email" placeholder="name@example.com" required>
+            </label>
+          </div>
+        </div>
+
+        <!-- PayPal Hinweis -->
+        <div id="paypalForm" class="pmethod-panel" hidden>
+          <p class="muted">Du wirst nach dem Bestätigen zu PayPal weitergeleitet (Demo).</p>
+          <div class="row">
+            <label>E-Mail für Tickets
+              <input type="email" id="buyerEmailPaypal" autocomplete="email" placeholder="name@example.com">
+            </label>
+          </div>
+        </div>
+
+        <!-- SEPA Formular -->
+        <div id="sepaForm" class="pmethod-panel" hidden>
+          <div class="row">
+            <label>Kontoinhaber*in
+              <input type="text" id="sepaName" placeholder="Max Mustermann">
+            </label>
+          </div>
+          <div class="row">
+            <label>IBAN
+              <input type="text" id="sepaIban" inputmode="text" placeholder="DE12 3456 7890 1234 5678 90">
+            </label>
+          </div>
+          <p class="small muted">Mit der Bestätigung erteilst du ein SEPA-Lastschriftmandat (Demo).</p>
+          <div class="row">
+            <label>E-Mail für Tickets
+              <input type="email" id="buyerEmailSepa" autocomplete="email" placeholder="name@example.com">
+            </label>
+          </div>
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" id="acceptTerms" required>
+          <span>Ich akzeptiere die AGB und die Widerrufsbedingungen.</span>
+        </label>
+
+        <div class="pay-actions">
+          <a href="booking.html" class="btn ghost">Zurück</a>
+          <button type="submit" class="btn primary" id="payNow" disabled>Jetzt bezahlen</button>
+        </div>
+
+        <div id="formError" class="form-error" role="alert" aria-live="polite"></div>
+      </form>
+
+      <!-- Rechte Spalte: Zusammenfassung -->
+      <aside class="summary-card" aria-labelledby="sumTitle">
+        <h2 id="sumTitle">Zusammenfassung</h2>
+
+        <div class="ticket-head">
+          <div class="ticket-cover">
+            <img id="sumPoster" alt="Filmposter">
+          </div>
+          <div class="ticket-info">
+            <div class="ticket-title" id="sumTitleMovie">—</div>
+            <div class="ticket-meta">
+              <span id="sumCity">—</span> · <span id="sumDate">—</span> · <span id="sumTime">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="selection">
+          <div class="selection-row">
+            <span class="muted">Ausgewählte Plätze</span>
+          </div>
+          <ul id="sumSeats" class="seat-list"></ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="price-block">
+          <div class="price-row"><span>Zwischensumme</span><strong id="sumSubtotal">0,00 €</strong></div>
+          <div class="price-row"><span>3D-Zuschlag</span><strong id="sum3D">0,00 €</strong></div>
+          <div class="price-row total"><span>Gesamt</span><strong id="sumTotal">0,00 €</strong></div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Erfolgszustand -->
+    <section id="success" class="success hidden" aria-live="polite">
+      <div class="success-card">
+        <h2>Zahlung erfolgreich</h2>
+        <p>Deine Buchung wurde bestätigt.</p>
+        <p class="small muted">Bestellnummer: <strong id="ordNo">—</strong></p>
+        <div class="success-actions">
+          <a class="btn" href="index.html">Zur Startseite</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="checkout.js"></script>
+</body>
+</html>
