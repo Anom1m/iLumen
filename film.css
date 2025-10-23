@@ -1,0 +1,192 @@
+/* Film-Detailseite */
+.film-hero{position:relative;overflow:hidden;margin:16px 0 0;border-bottom:1px solid rgba(255,255,255,.06);background:var(--panel)}
+.film-hero-bg{position:absolute;inset:0}
+.film-hero-bg img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:brightness(.45);transform:scale(1.03)
+}
+.film-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:280px 1fr;gap:24px;padding:28px 20px 32px;max-width:var(--max);margin:auto}
+/* Container – neu */
+.film-cover {
+  width: 100%;
+  position: relative;     /* wichtig für das Overlay */
+  border-radius: 14px;    /* damit Overlay die gleiche Rundung hat */
+  overflow: hidden;       /* verhindert, dass das Overlay über die Ecken hinausgeht */
+}
+
+.film-cover img{
+  display:block;width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:14px;
+  border:1px solid rgba(255,255,255,.06);background:linear-gradient(#111,#000);
+  box-shadow:var(--shadow); position: relative; z-index:1;         
+}
+.film-head h1{margin:0 0 6px;font-size:clamp(1.6rem,3.5vw,2.2rem);color:#fff}
+.film-meta{color:var(--muted);margin:0 0 10px}
+.film-actions{display:flex;gap:10px;margin-top:10px}
+.film-content{margin-top:22px}
+.film-grid{display:grid;grid-template-columns:1.5fr .8fr;gap:14px}
+@media (max-width:900px){.film-hero-inner{grid-template-columns:1fr}.film-grid{grid-template-columns:1fr}}
+
+.facts{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.facts div{background:var(--panel-2);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px}
+.facts span{color:var(--muted);font-size:.85rem}
+.facts strong{display:block;margin-top:4px}
+.cast{display:grid;gap:10px}
+.cast .row{display:flex;justify-content:space-between;gap:14px;padding:10px;background:var(--panel-2);border:1px solid rgba(255,255,255,.06);border-radius:10px}
+
+/* Filter */
+.filters.local{grid-template-columns:1fr 1fr auto}
+@media (max-width:640px){.filters.local{grid-template-columns:1fr}}
+
+/* Fallback wenn Bild nicht lädt */
+.film-hero-bg img[aria-broken="true"],
+.film-cover img[aria-broken="true"]{
+  display:block;background:linear-gradient(135deg,#0e0e12,#1a1a20);
+}
+
+/* --- SIEHE AUCH: Carousel mit 4 Karten --- */
+.see-also{margin:28px auto 24px}
+.see-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:12px}
+.see-title{display:flex;flex-direction:column;gap:8px}
+.see-title h2{margin:0;letter-spacing:.02em}
+.see-underline{width:46px;height:3px;border-radius:2px;background:var(--accent,#d02828)}
+
+/* Pfeile neben den Filmen (nicht überlagern) */
+.see-viewport{
+  display:grid;
+  grid-template-columns:auto 1fr auto; /* Pfeil | Track | Pfeil */
+  align-items:center;
+  gap:8px;
+}
+.see-mask{
+  overflow:hidden; /* verhindert manuelles Scrollen, zeigt exakt 4 Karten */
+}
+.see-track{
+  display:flex;
+  gap:12px;
+  will-change:transform;
+}
+
+/* 4 Karten pro „Seite“ */
+.see-card{
+  background:var(--panel-2);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+  overflow:hidden;
+  transition:transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  flex:0 0 calc((100% - 3*12px)/4); /* 4 Karten im Sichtfenster */
+}
+.see-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(255,255,255,.12)}
+.see-card a{display:block;color:inherit;text-decoration:none;height:100%}
+
+.see-cover{position:relative;aspect-ratio:2/3;overflow:hidden;background:#111}
+.see-cover img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+  filter:contrast(1.02) saturate(1.02)
+}
+.see-cover img[aria-broken="true"]{background:linear-gradient(135deg,#0e0e12,#1a1a20)}
+
+.see-body{padding:10px}
+.see-title-text{display:block;font-weight:600;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.see-meta{color:var(--muted);font-size:.86rem;margin-top:4px}
+
+/* Kleine, dezente Pfeile */
+.see-nav{
+  width:32px;height:32px;border-radius:999px;display:grid;place-items:center;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.15);
+  color:#fff;cursor:pointer;
+  transition:background .15s ease,border-color .15s ease,opacity .15s ease;
+}
+.see-nav:hover{background:var(--panel-2);border-color:rgba(255,255,255,.25)}
+.see-nav[disabled]{opacity:.4;pointer-events:none}
+
+/* Overlay NUR auf dem kleinen Cover */
+.cover-overlay{
+  position:absolute; inset:0;
+  display:grid; grid-template-rows:auto 1fr auto;
+  pointer-events:none;
+  /* sorgt dafür, dass unten (Badge-Bereich) kein Text liegt */
+  padding:10px 10px 84px;  /* 84px ≈ Badge-Höhe + Luft */
+  z-index:4;               /* über Bild & über Badge */
+}
+
+/* Titel oben */
+.cover-title{
+  margin:8px;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-size:clamp(1rem,2.2vw,1.25rem);
+  color:#f6f6fa;
+  text-shadow:0 2px 6px rgba(0,0,0,.7);
+}
+
+/* Tagline mittig (mit leichter Lesbarkeitsfläche) */
+.cover-tagline{
+  align-self:center; justify-self:center;
+  max-width:90%;
+  text-align:center;
+  font-weight:700;
+  letter-spacing:.04em;
+  font-size:clamp(.75rem,1.8vw,.95rem);
+  color:#ffffffef; /* minimal heller */
+  padding:6px 12px;
+  background:linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,.18), rgba(0,0,0,.35));
+  border-radius:999px;
+  box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+
+/* Credits unten mittig */
+.cover-credits{
+  align-self:end; justify-self:center;
+  margin-bottom:8px;
+  font-size:.65rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#e8e8ee;
+  text-shadow:0 2px 8px rgba(0,0,0,.6);
+  opacity:.95;
+}
+
+/* FSK-Badge – transparenter & unter dem Text-Layer */
+.cover-fsk{
+  position:absolute;
+  left:10px;
+  bottom:10px;
+  width:64px;
+  height:64px;
+  border-radius:10px;
+  display:grid;
+  grid-template-rows:14px 1fr 14px;
+  align-items:center;
+  justify-items:center;
+  pointer-events:none;
+  z-index:3;              /* < Overlay (z-index:4) */
+  box-shadow:0 4px 12px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.12);
+  backdrop-filter: blur(2px);
+  opacity:.82;            /* 🔸 noch durchsichtiger */
+}
+
+/* Farben je FSK (leicht transparenter als zuvor) */
+.cover-fsk[data-fsk="0"],
+.cover-fsk[data-fsk=""] {
+  background:linear-gradient(135deg, rgba(50,192,76,0.62), rgba(30,167,58,0.54));
+  color:#083b12;
+}
+.cover-fsk[data-fsk="6"]  { background:linear-gradient(135deg, rgba(255,230,80,0.62), rgba(245,200,40,0.54)); color:#3d2a00; }
+.cover-fsk[data-fsk="12"] { background:linear-gradient(135deg, rgba(60,120,255,0.62), rgba(30,80,200,0.54));  color:#001c66; }
+.cover-fsk[data-fsk="16"] { background:linear-gradient(135deg, rgba(140,90,255,0.62), rgba(110,60,200,0.54)); color:#1b003d; }
+.cover-fsk[data-fsk="18"] { background:linear-gradient(135deg, rgba(240,60,60,0.62), rgba(180,30,30,0.54));  color:#4d0000; }
+
+.cover-fsk .fsk-top{ font-size:.65rem; font-weight:800; letter-spacing:.06em; opacity:.9; }
+.cover-fsk .fsk-mid{ font-size:1.6rem; line-height:1; font-weight:900; opacity:.9; }
+.cover-fsk .fsk-bot{ font-size:.6rem;  font-weight:700; letter-spacing:.03em; opacity:.9; }
+
+
+/*
+.cover-fsk .fsk-top{font-size:.65rem;font-weight:800;letter-spacing:.06em}
+.cover-fsk .fsk-mid{font-size:1.6rem;line-height:1;font-weight:900}
+.cover-fsk .fsk-bot{font-size:.6rem;font-weight:700;letter-spacing:.03em}
+
+

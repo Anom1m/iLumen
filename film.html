@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>ILumen - Informationen</title>
+  <meta name="theme-color" content="#0A0A0C" />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="film.css" />
+</head>
+
+<body>
+  <header class="top">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+      <img src="images/2_ohne.png" alt="ILumen Logo" class="logo" />
+    </a>
+      <nav class="navlinks" aria-label="Hauptnavigation">
+        <a href="index.html#now">Aktuell</a>
+        <a href="index.html#showtimes">Spielzeiten</a>
+        <a href="index.html#locations">Standorte</a>
+        <a href="index.html#prices">Preise</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero --> 
+    <section class="film-hero">
+      <div class="film-hero-bg">
+        <img id="hero-img" alt="" referrerpolicy="no-referrer" />
+      </div>
+      
+      <div class="container film-hero-inner">
+      <div class="film-cover">
+        <img id="film-cover" alt="Filmcover" referrerpolicy="no-referrer" />
+        <!-- Overlay NUR auf dem kleinen Cover -->
+        <div class="cover-overlay">
+          <div class="cover-title"   id="cover-title">—</div>
+          <div class="cover-tagline" id="cover-tagline">—</div>
+          <div class="cover-credits" id="cover-credits">—</div>
+          <div class="cover-fsk" id="cover-fsk">
+            <span class="fsk-top">FSK</span>
+            <span class="fsk-mid" id="fsk-number">12</span>
+            <span class="fsk-bot" id="fsk-text">freigegeben</span>
+        </div>
+      </div>
+    </div>
+
+        <div class="film-head">
+          <h1 id="film-title">—</h1>
+          <div class="film-meta" id="film-meta">—</div>
+          <div class="chips" id="film-genres"></div>
+          <div class="film-actions">
+            <a class="btn primary" href="#times">Tickets & Spielzeiten</a>
+            <a class="btn secondary" id="trailer-btn" target="_blank" rel="noopener">Trailer</a>
+          </div>
+        </div>
+      </div>
+    </section> 
+
+    <!-- Inhalt + Cast -->
+    <section class="container film-content">
+      <div class="film-grid">
+        <article class="panel">
+          <h2>Inhalt</h2>
+          <p id="film-overview" class="muted">—</p>
+
+          <div class="facts">
+            <div><span>FSK</span><strong id="fact-fsk">—</strong></div>
+            <div><span>Länge</span><strong id="fact-dur">—</strong></div>
+            <div><span>Release</span><strong id="fact-release">—</strong></div>
+            <div><span>Format</span><strong id="fact-format">—</strong></div>
+          </div>
+        </article>
+
+        <aside class="panel">
+          <h3>Mitwirkende</h3>
+          <div class="cast" id="film-cast"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Spielzeiten -->
+    <section class="container" id="times">
+      <div class="section-head">
+        <h2>Spielzeiten</h2>
+        <span class="muted">Wähle deinen Standort</span>
+      </div>
+
+      <div class="filters local">
+        <div class="field">
+          <span class="muted">📍</span>
+          <select id="city">
+            <option value="">Alle Standorte</option>
+            <option>Berlin</option>
+            <option>Hamburg</option>
+            <option>München</option>
+            <option>Frankfurt</option>
+            <option>Dresden</option>
+          </select>
+        </div>
+        <div class="field">
+          <span class="muted">📅</span>
+          <input type="date" id="date" />
+        </div>
+        <div class="field action">
+          <button class="btn primary" id="apply">Filtern</button>
+        </div>
+      </div>
+
+      <div class="grid" id="showtime-grid"></div>
+    </section>
+  </main>
+
+<!-- SIEHE AUCH -->
+<section class="container see-also" id="see-also">
+  <div class="see-head">
+    <div class="see-title">
+      <span class="see-underline"></span>
+      <h2>SIEHE AUCH</h2>
+    </div>
+    <span class="muted">Weitere Empfehlungen</span>
+  </div>
+
+  <!-- Pfeile neben den Filmen -->
+  <div class="see-viewport">
+    <button class="see-nav see-prev" id="see-prev" aria-label="Zurück">&#10094;</button>
+
+    <!-- Sichtfenster (zeigt exakt 4 Karten) -->
+    <div class="see-mask">
+      <div class="see-track" id="see-track"><!-- wird per JS gefüllt --></div>
+    </div>
+
+    <button class="see-nav see-next" id="see-next" aria-label="Weiter">&#10095;</button>
+  </div>
+</section>
+
+
+  <footer>
+    <div class="container foot">
+      <div>
+        <img src="images/2_ohne.png" alt="ILumen Logo" class="footer-logo-img" />
+        <p class="muted">Dein Kinoerlebnis mit Top-Bild, sattem Sound und bequemen Sitzen.</p>
+      </div>
+      <div>
+        <strong>Programm</strong><br/>
+        <a href="index.html#now">Now</a><br/>
+        <a href="index.html#showtimes">Spielzeiten</a><br/>
+        <a href="index.html#locations">Standorte</a>
+      </div>
+      <div>
+        <strong>Rechtliches</strong><br/>
+        <a href="#">AGB</a><br/>
+        <a href="#">Datenschutz</a><br/>
+        <a href="#">Impressum</a>
+      </div>
+    </div>
+    <div class="container copyright">© <span id="year"></span> ILumen GmbH.</div>
+  </footer>
+
+  <script src="film.js"></script>
+</body>
+</html>
+

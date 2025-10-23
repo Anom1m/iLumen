@@ -1,11 +1,11 @@
-// --- Dummy-Daten ---
+// --- Dummy-Daten (Poster aktualisiert) ---
 const MOVIES = [
   {
     id: 'm1',
-    title: 'Neon Nights',
+    title: 'Dark Nights',
     rating: 'FSK 12', dur: 122,
     genres: ['Thriller','Action','Crime'],
-    poster: 'https://images.pexels.com/photos/30135207/pexels-photo-30135207.jpeg?cs=srgb&dl=pexels-jesserphotonyc-30135207.jpg&fm=jpg',
+    poster: 'https://wallpapers.com/images/hd/mysterious-noir-detective-smoking-in-foggy-alley-p5sg0z8slwalzjuj.jpg',
     times: ['12:30','15:15','18:00','20:45'],
     soldOut: ['18:00']
   },
@@ -14,7 +14,7 @@ const MOVIES = [
     title: 'Quiet Skies',
     rating: 'FSK 6', dur: 105,
     genres: ['Drama'],
-    poster: 'https://images.pexels.com/photos/30135207/pexels-photo-30135207.jpeg?cs=srgb&dl=pexels-jesserphotonyc-30135207.jpg&fm=jpg',
+    poster: 'https://images.pexels.com/photos/629168/pexels-photo-629168.jpeg?cs=srgb&dl=pexels-eberhardgross-629168.jpg&fm=jpg',
     times: ['13:00','16:00','19:30'],
     soldOut: []
   },
@@ -23,7 +23,7 @@ const MOVIES = [
     title: 'Galactic Run',
     rating: 'FSK 16', dur: 131, 
     genres: ['Sci-Fi','Adventure'],
-    poster: 'https://images.pexels.com/photos/30135207/pexels-photo-30135207.jpeg?cs=srgb&dl=pexels-jesserphotonyc-30135207.jpg&fm=jpg',
+    poster: 'https://img2.wallspic.com/crops/4/2/4/3/4/143424/143424-flug-verkehrsflugzeug-himmel-luft_und_raumfahrttechnik-flugreise-3840x2160.jpg',
     cities: ['Hamburg','München'],
     times: ['14:00','17:00','20:00','22:30'],
     soldOut: ['20:00','22:30']
@@ -33,7 +33,7 @@ const MOVIES = [
     title: 'Little Giants',
     rating: 'FSK 0', dur: 94,
     genres: ['Familie','Animation'],
-    poster: '',
+    poster: 'https://cdn.prod.website-files.com/601dc4639d384b60c94af395/63228575930aee1de85a1c11_DC%20League%20Of%20Superpets.jpg',
     cities: ['Berlin','Dresden','Frankfurt'],
     times: ['11:00','13:30','16:15'],
     soldOut: []
@@ -43,18 +43,17 @@ const MOVIES = [
     title: 'Edge of Echo',
     rating: 'FSK 12', dur: 118,
     genres: ['Mystery','Thriller'],
-    poster: '',
+    poster: 'https://images.handelsblatt.com/YBzT5ws5t-z1/cover/1400/934/0/0/142/142/0.5/0.5/vermisst.jpeg',
     cities: ['Frankfurt','Hamburg','München'],
     times: ['15:45','19:00','21:45'],
     soldOut: ['21:45']
   },
-
   {
     id: 'm6',
     title: 'Midnight Horizon',
     rating: 'FSK 16', dur: 128,
     genres: ['Action','Sci-Fi'],
-    poster: '',
+    poster: 'https://static.vecteezy.com/system/resources/previews/025/489/577/large_2x/exploding-alien-spaceship-creates-mystery-in-star-field-atmosphere-generated-by-ai-free-photo.jpg',
     cities: ['Berlin','Hamburg','München'],
     times: ['17:00','20:00','22:45'],
     soldOut: ['22:45']
@@ -64,7 +63,7 @@ const MOVIES = [
     title: 'Whispering Woods',
     rating: 'FSK 12', dur: 110,
     genres: ['Fantasy','Drama'],
-    poster: '',
+    poster: 'https://media.desenio.com/site_images/68b98eda9ff41a89f78cbd24_526715612_CAN11254-5_variant_main_image_ds.jpg?auto=compress%2Cformat&fit=max&w=3840',
     cities: ['Frankfurt','Dresden'],
     times: ['14:30','18:15','21:00'],
     soldOut: []
@@ -74,7 +73,7 @@ const MOVIES = [
     title: 'Ocean Deep',
     rating: 'FSK 0', dur: 95,
     genres: ['Dokumentation','Abenteuer'],
-    poster: '',
+    poster: 'https://mim.p7s1.io/pis/ld/bcedzChLCVyZ-c1vEwXZAanB-DJ78rnq2V2gRWTHzVV6NywNWMSJCEGmZ4YSENP-WRL0b9lo2z78GmGphRwkMiQ4AqTv6UM2hR5PzEf8k1XCy8QQY9c048waIREpp-ZENl8007SjuU4/profile:original?w=1200&rect=213%2C0%2C854%2C854',
     cities: ['Hamburg','Berlin','Frankfurt'],
     times: ['12:00','15:00','18:00'],
     soldOut: []
@@ -84,7 +83,7 @@ const MOVIES = [
     title: 'Crimson Vengeance',
     rating: 'FSK 18', dur: 134,
     genres: ['Thriller','Crime'],
-    poster: '',
+    poster: 'https://mojtv.hr/images/2018-09/0866d0d6-989c-4dd0-8be2-5aad78.jpg',
     cities: ['München','Berlin'],
     times: ['19:00','21:45','23:59'],
     soldOut: ['23:59']
@@ -94,10 +93,41 @@ const MOVIES = [
     title: 'Starlight Serenade',
     rating: 'FSK 6', dur: 102,
     genres: ['Musical','Romantik'],
-    poster: '',
+    poster: 'https://i.pinimg.com/736x/73/f2/1a/73f21a0ae2806bb93be9e56d27297247.jpg',
     cities: ['Dresden','Frankfurt','Hamburg'],
     times: ['13:15','16:00','19:00'],
     soldOut: []
+  }
+];
+
+// 🔸 Filme für die Booking-Seite verfügbar machen
+try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
+
+// --- COMING SOON (nur für Slideshow) ---
+const COMING_SOON = [
+  {
+    id: 'u1',
+    title: 'Interstellar',
+    rating: 'FSK 12', dur: 119,
+    genres: ['Sci-Fi','Drama'],
+    release: '2025-10-18',
+    poster: 'https://getwallpapers.com/wallpaper/full/6/2/e/1267879-movie-poster-wallpaper-1920x1080-for-hd.jpg'
+  },
+  {
+    id: 'u2',
+    title: 'Race',
+    rating: 'FSK 16', dur: 128,
+    genres: ['Action','Romantik'],
+    release: '2025-11-02',
+    poster: 'https://4kwallpapers.com/images/wallpapers/f1-the-movie-8k-3840x2160-22458.jpg'
+  },
+  {
+    id: 'u3',
+    title: 'The Mission',
+    rating: 'FSK 6', dur: 101,
+    genres: ['Action','Thriller'],
+    release: '2025-12-05',
+    poster: 'https://www.zastavki.com/pictures/originals/2023/Movies_Poster_for_the_new_movie_Mission_Impossible__Deadly_Reckoning._Part_1_161924_.jpg'
   }
 ];
 
@@ -119,11 +149,28 @@ dateInp.value = todayISO;
 function createMovieCard(m){
   const el = document.createElement('article');
   el.className = 'card';
+
   const poster = document.createElement('div');
   poster.className = 'poster';
   poster.style.backgroundImage = `url('${m.poster}')`;
   poster.role = 'img';
   poster.ariaLabel = `${m.title} Poster`;
+
+  // Overlay + Button für "Mehr Infos"
+  const overlay = document.createElement("div");
+  overlay.className = "overlay";
+  const btn = document.createElement("button");
+  btn.className = "btn-info";
+  btn.textContent = "Mehr Infos";
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    window.location.href = `film.html?id=${m.id}`;
+  });
+  overlay.appendChild(btn);
+
+  el.appendChild(poster);
+  el.appendChild(overlay);
+
   const body = document.createElement('div');
   body.className = 'card-body';
   body.innerHTML = `
@@ -131,7 +178,7 @@ function createMovieCard(m){
     <div class="meta">${m.rating} • ${m.dur} Min</div>
     <div class="chips">${m.genres.map(g=>`<span class="chip">${g}</span>`).join('')}</div>
   `;
-  el.append(poster, body);
+  el.append(body);
   return el;
 }
 
@@ -178,29 +225,35 @@ function render(){
 applyBtn.addEventListener('click', render);
 qInp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') render(); });
 
-// Ticket-Click
+// Klick auf Spielzeit -> 🔸 Booking-Seite (Film, City, Datum übernehmen)
 showGrid.addEventListener('click', (e)=>{
   const btn = e.target.closest('.time');
   if(!btn || btn.disabled) return;
+  const movieId = btn.dataset.movie;
   const time = btn.dataset.time;
-  const movie = MOVIES.find(x=>x.id===btn.dataset.movie);
-  alert(`Tickets für "${movie.title}" um ${time} – Platzwahl im nächsten Schritt.`);
+  const movie = MOVIES.find(m => m.id === movieId);
+  const city = citySel.value || (movie?.cities?.[0] || '');
+  const date = dateInp.value || todayISO;
+  // include movietitle as a fallback (used when localStorage isn't available)
+  const url = `booking.html?movie=${encodeURIComponent(movieId)}&movietitle=${encodeURIComponent(movie?.title||'')}&moviePoster=${encodeURIComponent(movie?.poster||'')}&time=${encodeURIComponent(time)}&city=${encodeURIComponent(city)}&date=${encodeURIComponent(date)}`;
+  window.location.href = url;
 });
 
 // Initiale Darstellung
 render();
 
+// Header-Scroll
 const header = document.querySelector("header.top");
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 350) {      // ab 350px Scrolltiefe
-    header.style.transform = "translateY(-100%)"; // nach oben raus
+  if (window.scrollY > 400) {
+    header.style.transform = "translateY(-100%)";
   } else {
-    header.style.transform = "translateY(0)";     // wieder sichtbar
+    header.style.transform = "translateY(0)";
   }
 });
 
 // --- Hero Slideshow ---
-const heroMovies = MOVIES.slice(0, 3); 
+const heroMovies = COMING_SOON;
 const slidesContainer = document.querySelector(".slides");
 const heroTitle = document.getElementById("hero-title");
 const heroMeta  = document.getElementById("hero-meta");
@@ -215,14 +268,12 @@ heroMovies.forEach((m, i) => {
   slide.className = "hero-slide" + (i === 0 ? " active" : "");
   slide.style.backgroundImage = `url('${m.poster}')`;
 
-  // Ganze Bannerfläche klickbar
   slide.addEventListener("click", () => {
     window.location.href = `film.html?id=${m.id}`;
   });
 
   slidesContainer.appendChild(slide);
 
-  // Timeline-Bar
   const bar = document.createElement("div");
   bar.className = "bar";
 
@@ -237,14 +288,12 @@ heroMovies.forEach((m, i) => {
   heroTimeline.appendChild(bar);
 });
 
-// Infos anzeigen
 function showHeroInfo(index) {
   const m = heroMovies[index];
-  heroTitle.textContent = m.title;
+  heroTitle.innerHTML = `<span class="badge-upcoming">Demnächst</span><br/>${m.title}`;
   heroMeta.textContent  = `${m.rating} • ${m.dur} Min • ${m.genres.join(", ")}`;
 }
 
-// Nur Marker resetten
 function resetTimeline() {
   document.querySelectorAll(".hero-timeline .marker").forEach(el => {
     el.style.transition = "none";
@@ -252,16 +301,14 @@ function resetTimeline() {
   });
 }
 
-// Alle Bars hart resetten (inkl. Fill) + Reflow erzwingen
 function clearAllBars() {
   document.querySelectorAll(".hero-timeline .fill, .hero-timeline .marker").forEach(el => {
     el.style.transition = "none";
     el.style.width = "0%";
   });
-  void document.body.offsetHeight; // Reflow
+  void document.body.offsetHeight;
 }
 
-// Startet Fill + Marker neu
 function startTimeline(index) {
   const bar = document.querySelectorAll(".hero-timeline .bar")[index];
   if (!bar) return;
@@ -269,28 +316,24 @@ function startTimeline(index) {
   const fill = bar.querySelector(".fill");
   const marker = bar.querySelector(".marker");
 
-  // Reset auf 0
   fill.style.transition = "none";
   marker.style.transition = "none";
   fill.style.width = "0%";
   marker.style.width = "0%";
 
-  void fill.offsetWidth; // Reflow erzwingen
+  void fill.offsetWidth;
 
-  // Jetzt animieren
   requestAnimationFrame(() => {
     fill.style.transition = `width ${intervalTime}ms linear`;
     marker.style.transition = `width ${intervalTime}ms linear`;
-    fill.style.width = "100%";   // Rot wächst
-    marker.style.width = "100%"; // Weißer Marker läuft drüber
+    fill.style.width = "100%";
+    marker.style.width = "100%";
   });
 }
 
-// Initial
 showHeroInfo(currentSlide);
 startTimeline(currentSlide);
 
-// Loop
 setInterval(() => {
   const slides = document.querySelectorAll(".hero-slide");
   slides[currentSlide]?.classList.remove("active");
@@ -298,7 +341,6 @@ setInterval(() => {
   const next = (currentSlide + 1) % heroMovies.length;
   currentSlide = next;
 
-  // Wenn alle Slides durch → alles resetten
   if (currentSlide === 0) {
     clearAllBars();
   }
@@ -311,3 +353,5 @@ setInterval(() => {
     startTimeline(currentSlide);
   });
 }, intervalTime);
+
+
