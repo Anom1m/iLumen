@@ -6,6 +6,7 @@ const MOVIES = [
     rating: 'FSK 12', dur: 122,
     genres: ['Thriller','Action','Crime'],
     poster: 'https://wallpapers.com/images/hd/mysterious-noir-detective-smoking-in-foggy-alley-p5sg0z8slwalzjuj.jpg',
+    cities: ['Berlin','Hamburg','München'],
     times: ['12:30','15:15','18:00','20:45'],
     soldOut: ['18:00']
   },
@@ -103,6 +104,41 @@ const MOVIES = [
 // 🔸 Filme für die Booking-Seite verfügbar machen
 try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
 
+// --- Schedules automatisch für jede Film-Instanz erzeugen (Datum + Uhrzeiten)
+// Ziel: jede Vorstellung an verschiedenen Tagen und zu verschiedenen Uhrzeiten
+function generateSchedules(movies, days = 10) {
+  const today = new Date();
+  movies.forEach((m, idx) => {
+    // Ensure base times exist
+    const baseTimes = Array.isArray(m.times) && m.times.length ? m.times.slice() : ['13:00','16:00','19:00'];
+    m.schedule = [];
+
+    // Stabile rotation: verschiebe start-Offset nach Index damit Filme an unterschiedlichen Tagen starten
+    const startOffset = idx % 3; // 0..2
+
+    for (let d = 0; d < days; d++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + d + startOffset);
+      const iso = date.toISOString().slice(0,10);
+
+      // Pick 2-4 times per day by rotating baseTimes and slicing
+      const rot = (d + idx) % baseTimes.length;
+      const times = [];
+      const count = 2 + ((d + idx) % 3); // 2..4 times
+      for (let t = 0; t < count; t++) {
+        times.push(baseTimes[(rot + t) % baseTimes.length]);
+      }
+
+      // avoid duplicate schedule entries
+      m.schedule.push({ date: iso, times });
+    }
+  });
+}
+
+generateSchedules(MOVIES, 30);
+// Persist updated MOVIES (including generated schedule) so other pages / booking can read them
+try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
+
 // --- COMING SOON (nur für Slideshow) ---
 const COMING_SOON = [
   {
@@ -187,13 +223,20 @@ function createShowCard(m){
   el.className = 'card';
   const body = document.createElement('div');
   body.className = 'card-body';
+  // Use schedule for the currently selected date
+  const selDate = dateInp.value || todayISO;
+  const sched = (m.schedule || []).find(s => s.date === selDate);
+  const timesHtml = (sched && sched.times && sched.times.length)
+    ? sched.times.map(t=>{
+        const sold = (m.soldOut || []).includes(t);
+        return `<button class="time ${sold?'sold':''}" ${sold?'disabled':''} data-movie="${m.id}" data-time="${t}">${t}</button>`;
+      }).join('')
+    : `<div class="muted">Keine Vorstellung am ${selDate}</div>`;
+
   body.innerHTML = `
     <div class="title">${m.title}</div>
     <div class="meta">${m.rating} • ${m.dur} Min • <span class="muted">${m.cities?.join(', ') || ''}</span></div>
-    <div class="times">${m.times.map(t=>{
-      const sold = m.soldOut.includes(t);
-      return `<button class="time ${sold?'sold':''}" ${sold?'disabled':''} data-movie="${m.id}" data-time="${t}">${t}</button>`;
-    }).join('')}</div>
+    <div class="times">${timesHtml}</div>
   `;
   el.append(body);
   return el;
@@ -205,10 +248,13 @@ function render(){
 
   const city = citySel.value;
   const q = qInp.value.trim().toLowerCase();
+  const date = dateInp.value || todayISO;
 
   const filtered = MOVIES.filter(m =>
     (!city || m.cities?.includes(city)) &&
-    (!q || m.title.toLowerCase().startsWith(q))
+    (!q || m.title.toLowerCase().startsWith(q)) &&
+    // only show movies that have showtimes on the selected date
+    ((m.schedule && m.schedule.some(s => s.date === date)) || false)
   );
 
   // Now Playing
@@ -224,6 +270,9 @@ function render(){
 
 applyBtn.addEventListener('click', render);
 qInp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') render(); });
+// react to date or city changes immediately
+dateInp.addEventListener('change', render);
+citySel.addEventListener('change', render);
 
 // Klick auf Spielzeit -> 🔸 Booking-Seite (Film, City, Datum übernehmen)
 showGrid.addEventListener('click', (e)=>{

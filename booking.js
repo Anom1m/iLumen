@@ -118,6 +118,9 @@ return label; // Zusatz "(Premium)" nicht anzeigen – im Mock war es clean
   subtotalEl.textContent = base.toFixed(2).replace(".", ",") + " €";
   surcharge3dEl.textContent = extra.toFixed(2).replace(".", ",") + " €";
   totalPriceEl.textContent = total.toFixed(2).replace(".", ",") + " €";
+  // clear booking error when user selects seats
+  const bookingError = document.getElementById('bookingError');
+  if (bookingError) bookingError.textContent = '';
 }
 updateSummary();
 
@@ -164,6 +167,7 @@ function renderSelectedSeatsList(selectedSeatLabels){
 }
 
 document.getElementById('checkout').addEventListener('click', () => {
+  const bookingError = document.getElementById('bookingError');
   // Sammle die nötigen Daten aus deiner bestehenden State/UI:
   const movieTitle = document.getElementById('ticketTitle')?.textContent?.trim() || '—';
   const poster = document.getElementById('ticketPoster')?.getAttribute('src') || '';
@@ -178,6 +182,15 @@ document.getElementById('checkout').addEventListener('click', () => {
     const label = `${rowToLetter(r)}${c}`;
     return label;
   });
+
+  // Validation: require at least one selected seat
+  if (!seats || seats.length === 0) {
+    if (bookingError) bookingError.textContent = 'Bitte wähle mindestens einen Sitzplatz aus.';
+    // focus the seat area to guide the user
+    const firstSeatRow = document.querySelector('.seat-row');
+    if (firstSeatRow) firstSeatRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
 
   // Hole vorhandene Zahlen aus deiner Preislogik
   const subtotal   = parseFloat((document.getElementById('subtotal')?.textContent||'0').replace(/[^\d,.-]/g,'').replace(',','.')) || 0;

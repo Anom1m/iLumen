@@ -36,6 +36,7 @@
   border:1px solid rgba(255,255,255,.06);
   cursor:pointer; user-select:none;
 }
+/* payment logos removed in rollback to 30-day-schedule state */
 .pmethod input { accent-color: var(--accent, #A4161A); }
 
 /* Panels */
@@ -55,8 +56,11 @@ input[type="text"], input[type="email"]{
 }
 input::placeholder{ color: rgba(255,255,255,.45); }
 
-.terms { display:flex; align-items:flex-start; gap:10px; margin: 10px 0 8px; }
-.terms input{ margin-top:3px; accent-color: var(--accent, #A4161A); }
+.terms { display:flex; flex-direction:row; align-items:center; gap:10px; margin: 10px 0 8px; }
+.terms input{ margin:0 6px 0 0; accent-color: var(--accent, #A4161A); }
+.terms span{ display:inline-block; }
+.terms a{ color:var(--accent, #A4161A); text-decoration:underline; }
+.terms a:hover{ text-decoration:none; }
 
 .pay-actions{
   display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:8px;
@@ -96,7 +100,6 @@ input::placeholder{ color: rgba(255,255,255,.45); }
 .price-block{ display:grid; gap:8px; }
 .price-row{ display:flex; justify-content:space-between; align-items:center; }
 .price-row.total strong{ font-size:1.2rem; }
-
 /* Erfolg */
 .success.hidden{ display:none; }
 .success-card{

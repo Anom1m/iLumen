@@ -1,11 +1,28 @@
 // --- Daten laden (aus sessionStorage oder URL-Params als Fallback)
 function getOrderFromStorage() {
+  const p = new URLSearchParams(location.search);
   try {
     const raw = sessionStorage.getItem('ilumenOrder');
-    if (raw) return JSON.parse(raw);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      // merge with URL params for missing fields
+      const merged = Object.assign({}, parsed);
+      if (!merged.movieTitle) merged.movieTitle = p.get('movie') || '—';
+      if (!merged.poster) merged.poster = p.get('poster') || '';
+      if (!merged.city) merged.city = p.get('city') || '—';
+      if (!merged.date) merged.date = p.get('date') || '—';
+      if (!merged.time) merged.time = p.get('time') || '—';
+      if (!merged.seats || !merged.seats.length) merged.seats = (p.get('seats') || '').split(',').filter(Boolean);
+      if (typeof merged.is3D === 'undefined' || merged.is3D === null) merged.is3D = p.get('is3D') === '1';
+      merged.prices = merged.prices || {};
+      merged.prices.subtotal = Number(merged.prices.subtotal || p.get('subtotal') || 0);
+      merged.prices.surcharge3d = Number(merged.prices.surcharge3d || p.get('surcharge3d') || 0);
+      merged.prices.total = Number(merged.prices.total || p.get('total') || 0);
+      return merged;
+    }
   } catch(e){}
+
   // Fallback: minimale Daten aus URL
-  const p = new URLSearchParams(location.search);
   return {
     movieTitle: p.get('movie') || '—',
     poster: p.get('poster') || '',
