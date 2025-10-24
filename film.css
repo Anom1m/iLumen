@@ -1,3 +1,16 @@
+/* Additional styles for time display */
+.time{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  background:var(--panel-2, #1F1F23);
+  color:#ffffff; /* Changed to pure white for better contrast */
+  border:1px solid rgba(255,255,255,.06);
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:0.95rem;
+  cursor:pointer;
+  transition:transform .08s ease, background .12s ease, box-shadow .12s;
+}
 /* Film-Detailseite */
 .film-hero{position:relative;overflow:hidden;margin:16px 0 0;border-bottom:1px solid rgba(255,255,255,.06);background:var(--panel)}
 .film-hero-bg{position:absolute;inset:0}

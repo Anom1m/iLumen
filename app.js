@@ -178,9 +178,10 @@ const resultCount = document.getElementById('result-count');
 
 // Jahr im Footer
 document.getElementById('year').textContent = new Date().getFullYear();
-// Standard: heutiges Datum
+// Standard: kein voreingestelltes Datum – wenn Nutzer kein Datum wählt, zeigen wir alle Filme
 const todayISO = new Date().toISOString().slice(0,10);
-dateInp.value = todayISO;
+// leave date input empty by default so the page shows all movies until the user filters by date
+dateInp.value = '';
 
 function createMovieCard(m){
   const el = document.createElement('article');
@@ -248,13 +249,14 @@ function render(){
 
   const city = citySel.value;
   const q = qInp.value.trim().toLowerCase();
-  const date = dateInp.value || todayISO;
+  // Use the raw value from the date input. If empty, we want to show all movies.
+  const date = dateInp.value;
 
   const filtered = MOVIES.filter(m =>
     (!city || m.cities?.includes(city)) &&
     (!q || m.title.toLowerCase().startsWith(q)) &&
-    // only show movies that have showtimes on the selected date
-    ((m.schedule && m.schedule.some(s => s.date === date)) || false)
+    // only apply the date filter when the user actually selected a date
+    (!date || (m.schedule && m.schedule.some(s => s.date === date)))
   );
 
   // Now Playing
