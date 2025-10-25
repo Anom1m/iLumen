@@ -82,7 +82,7 @@ header.top{
 .hero-slide {
   position:absolute; inset:0;
   background-size:cover; background-position:center;
-  opacity:0; cursor:pointer;
+  opacity:0;
 }
 .hero-slide.active{opacity:1}
 
@@ -150,6 +150,7 @@ section{margin:28px 0}
 .chip{font-size:.72rem; padding:4px 8px; border-radius:999px; border:1px solid var(--accent); background:rgba(164,22,26,.1); color:var(--accent)}
 .times{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
 .time{font-weight:600; font-size:.85rem; padding:8px 10px; border-radius:8px; background:var(--panel-2);
+  color: #ffffff; /* ensure showtime text is visible on dark backgrounds */
   border:1px solid rgba(255,255,255,.06); cursor:pointer; transition:all .25s ease}
 .time:hover{border-color:var(--accent-2); color:var(--accent-2)}
 .time.sold{opacity:.5; text-decoration:line-through}

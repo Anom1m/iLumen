@@ -319,9 +319,8 @@ heroMovies.forEach((m, i) => {
   slide.className = "hero-slide" + (i === 0 ? " active" : "");
   slide.style.backgroundImage = `url('${m.poster}')`;
 
-  slide.addEventListener("click", () => {
-    window.location.href = `film.html?id=${m.id}`;
-  });
+  // Klick deaktiviert: Slides unter "Demnächst" sind jetzt nicht mehr verlinkt
+  // (früher: navigate to film.html on click)
 
   slidesContainer.appendChild(slide);
 

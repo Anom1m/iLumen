@@ -22,7 +22,44 @@ function safeLoadImg(imgEl, src) {
   );
 }
 
-// --- Filmdaten (Trailer-Felder entfernt) ---
+
+function renderTrailer(movie) {
+  const container = qs('#trailer-video-container');
+  container.innerHTML = ''; // vorher leeren
+
+  if (!movie.trailer) {
+    container.innerHTML = '<p class="muted">Kein Trailer verfügbar.</p>';
+    return;
+  }
+
+
+  // Bereinige die URL: HTML-Entities entfernen und ggf. in Embed-Form bringen
+  let src = String(movie.trailer || '').replace(/&amp;/g, '&').trim();
+
+  // Wenn ein normaler YouTube-Watch-Link übergeben wurde, in das embed-Format konvertieren
+  const watchMatch = src.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+  if (watchMatch) {
+    const id = watchMatch[1];
+    src = `https://www.youtube-nocookie.com/embed/${id}`;
+  }
+
+  // (removed origin param injection — can trigger embed blocks in some environments)
+
+  const iframe = document.createElement('iframe');
+  iframe.width = '560';
+  iframe.height = '315';
+  iframe.src = src;
+  iframe.title = `Trailer zu ${movie.title}`;
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+  iframe.setAttribute('allowfullscreen', '');
+  // avoid forcing a referrer policy that may interfere with embedding
+  iframe.loading = 'lazy';
+
+  // Direktes Einfügen des iframes (kein wrapper / fallback)
+  container.appendChild(iframe);
+}
+
 const MOVIES = [
   {
     id: 'm1',
@@ -45,6 +82,7 @@ const MOVIES = [
     cities: ['Berlin', 'Hamburg', 'München'],
     times: ['12:30', '15:15', '18:00', '20:45'],
     soldOut: ['18:00'],
+    trailer: 'https://www.youtube-nocookie.com/embed/29BW2Zkqr3A?si=EDjsV4syINKFnFuC'
   },
 
   {
@@ -63,6 +101,7 @@ const MOVIES = [
     cities: ['Berlin', 'Hamburg'],
     times: ['13:00', '16:00', '19:30'],
     soldOut: [],
+    trailer: 'https://www.youtube-nocookie.com/embed/k9bUTfFF3_4?si=5xaP-EyBJ17y_IoI'
   },
   
   {
@@ -80,8 +119,10 @@ const MOVIES = [
     cast: [['Regie', 'S. Rahman'], ['Hauptrolle', 'J. Ortega']],
     cities: ['Hamburg', 'München'],
     times: ['14:00', '17:00', '20:00', '22:30'],
-    soldOut: ['20:00', '22:30']
+    soldOut: ['20:00', '22:30'],
+    trailer: 'https://www.youtube-nocookie.com/embed/S9uTScSgzrM?si=8nVFsLnGdYJoYbUP&amp;start=60'
   },
+
   {
     id: 'm4',
     title: 'Little Giants',
@@ -112,7 +153,8 @@ const MOVIES = [
     cast: [['Regie', 'C. Almeida'], ['Hauptrolle', 'M. Ren']],
     cities: ['Frankfurt', 'Hamburg', 'München'],
     times: ['15:45', '19:00', '21:45'],
-    soldOut: ['21:45']
+    soldOut: ['21:45'],
+    trailer: 'https://www.youtube-nocookie.com/embed/_P5vR9pz5Hc?si=LP_HlnFyARCi06HE'
   },
   {
     id: 'm6',
@@ -206,6 +248,8 @@ try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
 const params = new URLSearchParams(location.search);
 const id = params.get('id');
 const film = MOVIES.find((m) => m.id === id) || MOVIES[0];
+renderTrailer(film);
+
 
 // Render Hero + Header-Infos
 (function renderHero() {
@@ -249,12 +293,23 @@ const film = MOVIES.find((m) => m.id === id) || MOVIES[0];
   const trailerBtn = qs('#trailer-btn');
   if (film.trailer) {
     trailerBtn.href = film.trailer;
-    trailerBtn.textContent = 'Trailer ansehen';
+    trailerBtn.textContent = 'Zum Trailer';
   } else {
     trailerBtn.classList.add('muted');
     trailerBtn.textContent = 'Kein Trailer verfügbar';
     trailerBtn.removeAttribute('href');
   }
+
+// Sanftes Scrollen zum Trailer-Bereich
+trailerBtn.addEventListener('click', (e) => {
+  e.preventDefault(); // Verhindert direktes Springen
+
+  const target = qs('#trailer');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
 
   // Cast
   const castWrap = qs('#film-cast');
@@ -370,3 +425,4 @@ function renderSeeAlso() {
   renderPage();
 }
 renderSeeAlso();
+

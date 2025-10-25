@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>ILumen - Informationen</title>
+  <title>ILumen - Film Information</title>
   <meta name="theme-color" content="#0A0A0C" />
   <link rel="icon" href="favicon.ico" />
   <link rel="stylesheet" href="style.css" />
@@ -19,7 +19,7 @@
     </a>
       <nav class="navlinks" aria-label="Hauptnavigation">
         <a href="index.html#now">Aktuell</a>
-        <a href="index.html#showtimes">Spielzeiten</a>
+        <a href="index.html#showtimes">Heute im Programm</a>
         <a href="index.html#locations">Standorte</a>
         <a href="index.html#prices">Preise</a>
       </nav>
@@ -55,7 +55,7 @@
           <div class="chips" id="film-genres"></div>
           <div class="film-actions">
             <a class="btn primary" href="#times">Tickets & Spielzeiten</a>
-            <a class="btn secondary" id="trailer-btn" target="_blank" rel="noopener">Trailer</a>
+            <a class="btn secondary" id="trailer-btn" href="#trailer">Trailer</a>
           </div>
         </div>
       </div>
@@ -82,6 +82,21 @@
         </aside>
       </div>
     </section>
+
+<!-- Trailer -->
+<section class="container film-trailer" id="trailer">
+  <div class="section-head">
+    <h2>Trailer</h2>
+    <span class="muted">Offizieller Filmtrailer</span>
+  </div>
+
+  <div class="trailer-wrapper">
+    <div id="trailer-video-container">
+      <!-- Wird per JS mit <iframe> oder <video> gefüllt -->
+    </div>
+  </div>
+</section>
+
 
     <!-- Spielzeiten -->
     <section class="container" id="times">
