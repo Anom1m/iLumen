@@ -60,10 +60,12 @@ function renderTrailer(movie) {
   container.appendChild(iframe);
 }
 
+
+// --- Filmdaten (mit individuellen Postern) ---
 const MOVIES = [
   {
     id: 'm1',
-    title: 'Dark Nights',
+    title: 'Neon Nights',
     rating: 'FSK 12',
     dur: 122,
     formats: ['2D', 'OV'],
@@ -84,7 +86,6 @@ const MOVIES = [
     soldOut: ['18:00'],
     trailer: 'https://www.youtube-nocookie.com/embed/29BW2Zkqr3A?si=EDjsV4syINKFnFuC'
   },
-
   {
     id: 'm2',
     title: 'Quiet Skies',
@@ -95,6 +96,8 @@ const MOVIES = [
     release: '2025-08-07',
     poster:
       'https://images.pexels.com/photos/629168/pexels-photo-629168.jpeg?cs=srgb&dl=pexels-eberhardgross-629168.jpg&fm=jpg',
+    tagline: 'Manchmal heilt die Stille lauter als jedes Wort.',
+    credits: 'M NOVAK • E HARTMANN • R WALTERS',
     overview:
       'Zwei Geschwister verbringen nach dem Verlust ihrer Mutter den Sommer bei ihrem Großvater am See. Die Tage scheinen still, doch in der Ruhe beginnt die Heilung. Zwischen Gesprächen über den Himmel, alten Erinnerungen und der Kraft des Schweigens finden sie langsam wieder zueinander. Der Film zeigt, dass Stille manchmal lauter sein kann als jedes Wort. Mit poetischen Bildern und gefühlvoller Musik lädt „Quiet Skies“ dazu ein, innezuhalten und das Leben neu zu betrachten. Ein leiser, aber tief bewegender Film über Familie, Verlust und Hoffnung.',
     cast: [['Regie', 'M. Novak'], ['Hauptrolle', 'E. Hartmann']],
@@ -103,7 +106,6 @@ const MOVIES = [
     soldOut: [],
     trailer: 'https://www.youtube-nocookie.com/embed/k9bUTfFF3_4?si=5xaP-EyBJ17y_IoI'
   },
-  
   {
     id: 'm3',
     title: 'Galactic Run',
@@ -114,6 +116,8 @@ const MOVIES = [
     release: '2025-10-01',
     poster:
       'https://img2.wallspic.com/crops/4/2/4/3/4/143424/143424-flug-verkehrsflugzeug-himmel-luft_und_raumfahrttechnik-flugreise-3840x2160.jpg',
+    tagline: 'Im Rennen der Sterne zählt nur der Mut – nicht die Geschwindigkeit.',
+    credits: 'S RAHMAN • J ORTEGA • P LIN',
     overview:
       'Im Jahr 2398 ist das „Galactic Run“ das gefährlichste Rennen der Galaxis – und das lukrativste. Schmugglerin Lira Voss will mit ihrem letzten Flug alles riskieren, um die Freiheit zu gewinnen. Doch ein mysteriöser Passagier an Bord verbirgt ein Geheimnis, das die Menschheit verändern könnte. Zwischen Laserfeuer, Raumstürmen und atemberaubenden Welten steht bald mehr auf dem Spiel als nur der Sieg. Der Film vereint epische Action mit emotionaler Tiefe und zeigt, dass Mut manchmal bedeutet, sich selbst zu verlieren. Ein galaktisches Spektakel voller Tempo und Herz.',
     cast: [['Regie', 'S. Rahman'], ['Hauptrolle', 'J. Ortega']],
@@ -122,7 +126,6 @@ const MOVIES = [
     soldOut: ['20:00', '22:30'],
     trailer: 'https://www.youtube-nocookie.com/embed/S9uTScSgzrM?si=8nVFsLnGdYJoYbUP&amp;start=60'
   },
-
   {
     id: 'm4',
     title: 'Little Giants',
@@ -132,12 +135,16 @@ const MOVIES = [
     genres: ['Familie', 'Animation'],
     release: '2025-07-10',
     poster: 'https://cdn.prod.website-files.com/601dc4639d384b60c94af395/63228575930aee1de85a1c11_DC%20League%20Of%20Superpets.jpg',
+    tagline: 'Auch die Kleinsten können Großes bewirken.',
+    credits: 'Y KIM • D BERG • S KLEIN',
     overview:
       'Als der beliebte Stadtpark abgerissen werden soll, schließen sich fünf tierische Freunde zusammen, um ihr Zuhause zu retten. Mit Witz, Mut und jeder Menge Chaos versuchen sie, die Menschen von der Bedeutung der Natur zu überzeugen. Dabei entdecken sie, dass selbst die Kleinsten Großes bewirken können. Farbenfrohe Animationen, liebevolle Figuren und ein starker Umweltschutzgedanke machen „Little Giants“ zu einem herzerwärmenden Abenteuer für die ganze Familie. Eine Geschichte über Freundschaft, Zusammenhalt und die Kraft, an das Gute zu glauben.',
     cast: [['Regie', 'Y. Kim'], ['Stimmen', 'D. Berg / S. Klein']],
     cities: ['Berlin', 'Dresden', 'Frankfurt'],
     times: ['11:00', '13:30', '16:15'],
-    soldOut: []
+    soldOut: [],
+    trailer: 'https://www.youtube-nocookie.com/embed/S9uTScSgzrM?si=8nVFsLnGdYJoYbUP&amp;start=60'
+
   },
   {
     id: 'm5',
@@ -148,6 +155,8 @@ const MOVIES = [
     genres: ['Mystery', 'Thriller'],
     release: '2025-06-26',
     poster: 'https://images.handelsblatt.com/YBzT5ws5t-z1/cover/1400/934/0/0/142/142/0.5/0.5/vermisst.jpeg',
+    tagline: 'Wenn Erinnerungen flüstern, findet die Wahrheit ihren Weg.',
+    credits: 'C ALMEIDA • M REN • L ZHOU',
     overview:
       'Eine Ermittlerin wird von den Stimmen einer alten Vermisstenmeldung heimgesucht, die nie gelöst wurde. Als sie dem Fall erneut nachgeht, stößt sie auf Spuren, die tief in ihre eigene Vergangenheit führen. Realität und Erinnerung beginnen zu verschwimmen, während sie das Echo eines Verbrechens verfolgt, das nie verstummte. „Edge of Echo“ ist ein psychologischer Thriller über Schuld, Identität und die Schatten der Vergangenheit. Mit eindringlichen Bildern und spannender Atmosphäre hält der Film das Publikum bis zur letzten Sekunde in Atem.',
     cast: [['Regie', 'C. Almeida'], ['Hauptrolle', 'M. Ren']],
@@ -155,6 +164,7 @@ const MOVIES = [
     times: ['15:45', '19:00', '21:45'],
     soldOut: ['21:45'],
     trailer: 'https://www.youtube-nocookie.com/embed/_P5vR9pz5Hc?si=LP_HlnFyARCi06HE'
+
   },
   {
     id: 'm6',
@@ -166,12 +176,15 @@ const MOVIES = [
     release: '2025-10-08',
     poster:
       'https://static.vecteezy.com/system/resources/previews/025/489/577/large_2x/exploding-alien-spaceship-creates-mystery-in-star-field-atmosphere-generated-by-ai-free-photo.jpg',
+    tagline: 'In der Dunkelheit der Galaxie beginnt der wahre Kampf.',
+    credits: 'T KAWAMURA • R COLE • H PARKER',
     overview:
       'In einer fernen Zukunft herrscht Krieg zwischen den Kolonien der Erde. Ein Spezialeinsatzteam wird auf einen verlassenen Planeten geschickt, um eine mysteriöse Energiequelle zu bergen. Doch was sie dort finden, übersteigt jede Vorstellung. Zwischen Explosionen, Verrat und dem Kampf ums Überleben müssen sie erkennen, dass nicht der Feind – sondern die Wahrheit selbst – ihr größter Gegner ist. „Midnight Horizon“ kombiniert packende Action mit philosophischen Fragen über Menschlichkeit und Fortschritt. Ein düsteres Sci-Fi-Abenteuer voller Spannung und Emotion.',
     cast: [['Regie', 'T. Kawamura'], ['Hauptrolle', 'R. Cole']],
     cities: ['Berlin', 'Hamburg', 'München'],
     times: ['17:00', '20:00', '22:45'],
-    soldOut: ['22:45']
+    soldOut: ['22:45'],
+    trailer: 'https://www.youtube-nocookie.com/embed/1oOBjyOKu2o?si=mb4aL6eiKRbVgPa0'
   },
   {
     id: 'm7',
@@ -183,12 +196,15 @@ const MOVIES = [
     release: '2025-05-15',
     poster:
       'https://media.desenio.com/site_images/68b98eda9ff41a89f78cbd24_526715612_CAN11254-5_variant_main_image_ds.jpg?auto=compress%2Cformat&fit=max&w=3840',
+    tagline: 'Wer den Wald hört, entdeckt sich selbst neu.',
+    credits: 'I ŠIMIĆ • T VARELA • K JENSEN',
     overview:
       'Die junge Botanikerin Elara entdeckt in einem abgeschiedenen Wald Pflanzen, die auf Geräusche reagieren. Doch je länger sie dort arbeitet, desto mehr spürt sie, dass der Wald ein eigenes Bewusstsein besitzt. Eine uralte Macht erwacht – und fordert ein Opfer. „Whispering Woods“ ist ein visuell beeindruckendes Fantasy-Drama über die Verbindung zwischen Mensch und Natur. Poetisch, mystisch und tief berührend entfaltet der Film eine Geschichte über Verlust, Vergebung und das Hören auf das, was zwischen den Zeilen klingt.',
     cast: [['Regie', 'I. Šimić'], ['Hauptrolle', 'T. Varela']],
     cities: ['Frankfurt', 'Dresden'],
     times: ['14:30', '18:15', '21:00'],
-    soldOut: []
+    soldOut: [],
+    trailer: 'https://www.youtube-nocookie.com/embed/CID-sYQNCew?si=u7_MuxL5A_xJMCG9'
   },
   {
     id: 'm8',
@@ -200,12 +216,15 @@ const MOVIES = [
     release: '2025-03-27',
     poster:
       'https://mim.p7s1.io/pis/ld/bcedzChLCVyZ-c1vEwXZAanB-DJ78rnq2V2gRWTHzVV6NywNWMSJCEGmZ4YSENP-WRL0b9lo2z78GmGphRwkMiQ4AqTv6UM2hR5PzEf8k1XCy8QQY9c048waIREpp-ZENl8007SjuU4/profile:original?w=1200&rect=213%2C0%2C854%2C854',
+    tagline: 'Je tiefer wir tauchen, desto klarer sehen wir uns selbst.',
+    credits: 'N PATEL • L BERNARD • F OKADA',
     overview:
       'Eine internationale Forschergruppe begibt sich auf eine Reise in die tiefsten Regionen der Ozeane. Mit modernster Technik dokumentieren sie Lebewesen, die noch nie zuvor gefilmt wurden. Atemberaubende Aufnahmen zeigen die Schönheit und Zerbrechlichkeit der Unterwasserwelt. „Ocean Deep“ ist mehr als nur eine Naturdokumentation – es ist eine Hommage an den Planeten Erde. Der Film macht bewusst, wie eng das Schicksal der Meere mit unserem eigenen verbunden ist. Ein visuell eindrucksvolles Abenteuer voller Staunen und Erkenntnis.',
     cast: [['Regie', 'N. Patel']],
     cities: ['Hamburg', 'Berlin', 'Frankfurt'],
     times: ['12:00', '15:00', '18:00'],
-    soldOut: []
+    soldOut: [],
+    trailer: 'https://www.youtube-nocookie.com/embed/bRPQmaFQiwM?si=7e2E5wZY91H3VZ8M'
   },
   {
     id: 'm9',
@@ -216,12 +235,15 @@ const MOVIES = [
     genres: ['Thriller', 'Crime'],
     release: '2025-09-05',
     poster: 'https://mojtv.hr/images/2018-09/0866d0d6-989c-4dd0-8be2-5aad78.jpg',
+    tagline: 'Rache kennt keine Erlösung – nur Konsequenzen.',
+    credits: 'H OKAFOR • S BIANCHI • V RODRÍGUEZ',
     overview:
       'Ein ehemaliger Auftragskiller schwört Rache, nachdem seine Familie Opfer eines Kartells wurde. Doch auf seinem Weg durch die Nacht entdeckt er, dass der Drahtzieher jemand aus den eigenen Reihen ist. Zwischen Gewalt und Gewissen kämpft er um Erlösung. „Crimson Vengeance“ ist ein düsterer, atmosphärischer Thriller über Schuld und Vergeltung. Stilistisch kompromisslos und emotional intensiv – ein Film, der die Grenzen zwischen Held und Monster verschwimmen lässt. Ein Rache-Epos, das unter die Haut geht.',
     cast: [['Regie', 'H. Okafor'], ['Hauptrolle', 'S. Bianchi']],
     cities: ['München', 'Berlin'],
     times: ['19:00', '21:45', '23:59'],
-    soldOut: ['23:59']
+    soldOut: ['23:59'],
+    trailer: 'https://www.youtube-nocookie.com/embed/uAZFK3fXp4A?si=fLNyiTzV66OhFVnW'
   },
   {
     id: 'm10',
@@ -232,12 +254,15 @@ const MOVIES = [
     genres: ['Musical', 'Romantik'],
     release: '2025-08-21',
     poster: 'https://i.pinimg.com/736x/73/f2/1a/73f21a0ae2806bb93be9e56d27297247.jpg',
+    tagline: 'Wo Worte versagen, spricht die Musik.',
+    credits: 'E MENDEZ • P YAMAMOTO • L ROSSI',
     overview:
       'Sängerin Lina träumt von einer großen Karriere, bleibt aber in kleinen Bars hängen. Als sie den verschlossenen Pianisten Kai trifft, entsteht eine besondere Verbindung – musikalisch wie emotional. Gemeinsam komponieren sie ein Lied, das ihr Leben verändern könnte. „Starlight Serenade“ ist eine Liebeserklärung an Musik, Hoffnung und zweite Chancen. Mit gefühlvollen Songs, farbenprächtigen Bühnenbildern und einer Prise Humor entführt der Film in eine Welt voller Leidenschaft. Ein modernes Musical, das Herz und Ohr gleichermaßen berührt.',
     cast: [['Regie', 'E. Mendez'], ['Hauptrolle', 'P. Yamamoto']],
     cities: ['Dresden', 'Frankfurt', 'Hamburg'],
     times: ['13:15', '16:00', '19:00'],
-    soldOut: []
+    soldOut: [],
+    trailer: 'https://www.youtube-nocookie.com/embed/cTlHQiRNVl0?si=TsfOQKkcLrAuEGMD'
   }
 ];
 
@@ -249,7 +274,6 @@ const params = new URLSearchParams(location.search);
 const id = params.get('id');
 const film = MOVIES.find((m) => m.id === id) || MOVIES[0];
 renderTrailer(film);
-
 
 // Render Hero + Header-Infos
 (function renderHero() {
@@ -289,6 +313,7 @@ renderTrailer(film);
   qs('#fact-dur').textContent = fmtDur(film.dur);
   qs('#fact-release').textContent = film.release ? fmtDate(film.release) : '—';
   qs('#fact-format').textContent = film.formats?.length ? film.formats.join(' / ') : '2D';
+
 
   const trailerBtn = qs('#trailer-btn');
   if (film.trailer) {
@@ -371,7 +396,7 @@ showGrid.addEventListener('click', (e) => {
 });
 
 
-// --- SIEHE AUCH: exakt 4 sichtbar, Blättern per Pfeile --- (unverändert)
+// --- SIEHE AUCH: exakt 4 sichtbar, Blättern per Pfeile ---
 function renderSeeAlso() {
   const track = document.getElementById('see-track');
   const prev = document.getElementById('see-prev');
@@ -379,6 +404,7 @@ function renderSeeAlso() {
   if (!track || !prev || !next) return;
 
   const allOthers = MOVIES.filter((m) => m.id !== film.id);
+
   const PAGE = 4;
   let start = 0;
 
@@ -390,22 +416,31 @@ function renderSeeAlso() {
   function renderPage() {
     const slice = allOthers.slice(start, start + PAGE);
     track.innerHTML = slice
-      .map(
-        (m) => `
-      <article class="see-card">
-        <a href="film.html?id=${m.id}" aria-label="${m.title}">
-          <div class="see-cover">
-            <img referrerpolicy="no-referrer" alt="${m.title} Poster"
-                 onerror="this.setAttribute('aria-broken','true'); this.removeAttribute('src');"
-                 src="${m.poster}">
-          </div>
-          <div class="see-body">
-            <span class="see-title-text">${m.title}</span>
-            <div class="see-meta">${m.rating} • ${m.dur} Min${m.formats ? ' • ' + m.formats.join(' / ') : ''}</div>
-          </div>
-        </a>
-      </article>`
-      )
+      .map((m) => {
+        const fskNum = (m.rating.match(/(\d+)/) || [])[1] || '0';
+        return `
+        <article class="see-card">
+          <a href="film.html?id=${m.id}" aria-label="${m.title}">
+            <div class="see-cover">
+              <img referrerpolicy="no-referrer" alt="${m.title} Poster"
+                   onerror="this.setAttribute('aria-broken','true'); this.removeAttribute('src');"
+                   src="${m.poster}">
+
+              <!-- Overlay mit Titel, Tagline, Credits & FSK -->
+              <div class="cover-overlay mini">
+                <div class="cover-title">${m.title}</div>
+                <div class="cover-tagline">${m.tagline || ''}</div>
+                <div class="cover-credits">${m.credits || ''}</div>
+                <div class="cover-fsk" data-fsk="${fskNum}">
+                  <span class="fsk-top">FSK</span>
+                  <span class="fsk-mid">${fskNum}</span>
+                  <span class="fsk-bot">freigegeben</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </article>`;
+      })
       .join('');
 
     prev.disabled = start <= 0;
@@ -426,3 +461,6 @@ function renderSeeAlso() {
 }
 renderSeeAlso();
 
+
+
+ 

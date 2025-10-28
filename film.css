@@ -100,60 +100,94 @@
 .see-nav:hover{background:var(--panel-2);border-color:rgba(255,255,255,.25)}
 .see-nav[disabled]{opacity:.4;pointer-events:none}
 
-/* Overlay NUR auf dem kleinen Cover */
+/* Overlay nur auf dem kleinen Cover — mit 2 Spalten: [Badge | Inhalt] */
 .cover-overlay{
   position:absolute; inset:0;
-  display:grid; grid-template-rows:auto 1fr auto;
+  display:grid;
+  grid-template-columns: 84px 1fr;   /* 64px Badge + ~20px Luft | Rest */
+  grid-template-rows: auto 1fr auto; /* Titel | Mitte | Fuß (Badge + Credits) */
+  column-gap: 8px;
+  row-gap: 8px;
+  padding: 10px;                      /* kein großes padding-bottom mehr nötig */
   pointer-events:none;
-  /* sorgt dafür, dass unten (Badge-Bereich) kein Text liegt */
-  padding:10px 10px 84px;  /* 84px ≈ Badge-Höhe + Luft */
-  z-index:4;               /* über Bild & über Badge */
+  z-index:4;                          /* über Bild */
 }
 
-/* Titel oben */
+/* Film-Titel auf dem kleinen Cover – mittig, groß, mit Plakat-Schatten */
 .cover-title{
-  margin:8px;
-  text-align:center;
-  font-weight:900;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  font-size:clamp(1rem,2.2vw,1.25rem);
-  color:#f6f6fa;
-  text-shadow:0 2px 6px rgba(0,0,0,.7);
+  grid-column: 1 / span 2;            /* über beide Spalten (mittig über Badge + Text) */
+  justify-self: center;
+  align-self: start;
+
+  margin: 10px 0 0 0;                 /* etwas Abstand nach oben */
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: clamp(1.6rem, 3vw, 2rem); /* deutlich größer */
+
+  /* kräftiger, weicher Schatten für 3D-Effekt */
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.65),
+    0 4px 12px rgba(0,0,0,0.75),
+    0 8px 28px rgba(0,0,0,0.55);
+
+  line-height: 1.1;
 }
 
-/* Tagline mittig (mit leichter Lesbarkeitsfläche) */
+/* Tagline: rechtsbündig, kursiv, Uppercase (ohne Blocksatz) */
 .cover-tagline{
-  align-self:center; justify-self:center;
-  max-width:90%;
-  text-align:center;
-  font-weight:700;
-  letter-spacing:.04em;
-  font-size:clamp(.75rem,1.8vw,.95rem);
-  color:#ffffffef; /* minimal heller */
-  padding:6px 12px;
-  background:linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,.18), rgba(0,0,0,.35));
-  border-radius:999px;
-  box-shadow:0 8px 20px rgba(0,0,0,.35);
+  grid-column: 2;            /* rechte Spalte */
+  grid-row: 2;               /* mittlerer Bereich */
+  justify-self: end;         /* an den rechten Rand */
+  align-self: end;         /* unten ausrichten */
+  margin-bottom: 14px;
+  max-width: 90%;
+
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 700;
+  font-size: clamp(.75rem,1.8vw,.95rem);
+  text-align: right;
+
+  color: #ffffffee;
+  padding: 6px 12px;
+  background: linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,.18), rgba(0,0,0,.35));
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
 }
 
-/* Credits unten mittig */
+/* Credits: Look unverändert, Platzierung neben dem Badge (rechts), sonst darunter */
 .cover-credits{
-  align-self:end; justify-self:center;
-  margin-bottom:8px;
-  font-size:.65rem;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:#e8e8ee;
-  text-shadow:0 2px 8px rgba(0,0,0,.6);
-  opacity:.95;
+  grid-column: 2;            /* rechte Spalte neben dem Badge */
+  grid-row: 3;               /* Fuß-Zeile */
+  justify-self: center;
+  align-self: end;
+
+  /* --- dein ursprünglicher Look --- */
+  margin: 0 10px 10px 10px;
+  font-size: .65rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color:#e2e2e8;
+  text-shadow:0 2px 8px rgba(0,0,0,.7);
+  opacity:.98;
+
+  text-align: center;
+  line-height: 1.4;
+  word-break: break-word;
+  max-width: 100%;
 }
 
-/* FSK-Badge – transparenter & unter dem Text-Layer */
+/* FSK-Badge – im Grid links unten; transparenter */
 .cover-fsk{
-  position:absolute;
-  left:10px;
-  bottom:10px;
+  grid-column: 1;            /* linke Spalte */
+  grid-row: 3;               /* Fuß-Zeile */
+  align-self: end;
+  justify-self: start;
+
   width:64px;
   height:64px;
   border-radius:10px;
@@ -162,17 +196,15 @@
   align-items:center;
   justify-items:center;
   pointer-events:none;
-  z-index:3;              /* < Overlay (z-index:4) */
+  z-index:3; /* unter dem Text-Overlay, aber vor dem Bild */
   box-shadow:0 4px 12px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.12);
   backdrop-filter: blur(2px);
-  opacity:.82;            /* 🔸 noch durchsichtiger */
+  opacity:.82;
 }
 
-/* Farben je FSK (leicht transparenter als zuvor) */
-.cover-fsk[data-fsk="0"],
-.cover-fsk[data-fsk=""] {
-  background:linear-gradient(135deg, rgba(50,192,76,0.62), rgba(30,167,58,0.54));
-  color:#083b12;
+/* Farben je FSK (halbtransparent) */
+.cover-fsk[data-fsk="0"], .cover-fsk[data-fsk=""] {
+  background:linear-gradient(135deg, rgba(50,192,76,0.62), rgba(30,167,58,0.54)); color:#083b12;
 }
 .cover-fsk[data-fsk="6"]  { background:linear-gradient(135deg, rgba(255,230,80,0.62), rgba(245,200,40,0.54)); color:#3d2a00; }
 .cover-fsk[data-fsk="12"] { background:linear-gradient(135deg, rgba(60,120,255,0.62), rgba(30,80,200,0.54));  color:#001c66; }
@@ -183,11 +215,110 @@
 .cover-fsk .fsk-mid{ font-size:1.6rem; line-height:1; font-weight:900; opacity:.9; }
 .cover-fsk .fsk-bot{ font-size:.6rem;  font-weight:700; letter-spacing:.03em; opacity:.9; }
 
+/* Bei schmalen Covern: einspaltig -> Credits unter dem Badge */
+@media (max-width: 480px){
+  .cover-overlay{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto; /* extra Zeile für Credits unten */
+  }
+  .cover-fsk{
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+  }
+  .cover-credits{
+    grid-column: 1;
+    grid-row: 4;            /* unter dem Badge */
+    justify-self: center;
+    text-align: center;
+    max-width: 100%;
+  }
+}
 
-/*
-.cover-fsk .fsk-top{font-size:.65rem;font-weight:800;letter-spacing:.06em}
-.cover-fsk .fsk-mid{font-size:1.6rem;line-height:1;font-weight:900}
-.cover-fsk .fsk-bot{font-size:.6rem;font-weight:700;letter-spacing:.03em}
+/* --- Siehe-auch Karten im gleichen Poster-Look --- */
+.cover-overlay.mini {
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns: 84px 1fr;
+  grid-template-rows: auto 1fr auto;
+  pointer-events:none;
+  z-index:4;
+  padding:8px;
+  row-gap:6px;
+}
+
+.cover-overlay.mini .cover-title {
+  grid-column:1 / span 2;
+  justify-self:center;
+  align-self:start;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#fff;
+  font-size:clamp(1rem,1.5vw,1.2rem);
+  text-shadow:0 2px 4px rgba(0,0,0,.6),0 4px 10px rgba(0,0,0,.7);
+}
+
+.cover-overlay.mini .cover-tagline {
+  grid-column:2;
+  justify-self:end;
+  align-self:end;
+  font-style:italic;
+  text-transform:uppercase;
+  font-weight:700;
+  font-size:.8rem;
+  text-align:right;
+  color:#ffffffee;
+  background:linear-gradient(to right, rgba(0,0,0,.35), rgba(0,0,0,.18), rgba(0,0,0,.35));
+  border-radius:999px;
+  padding:4px 10px;
+  max-width:90%;
+  box-shadow:0 6px 10px rgba(0,0,0,.35);
+}
+
+.cover-overlay.mini .cover-credits {
+  grid-column:2;
+  grid-row:3;
+  justify-self:center;
+  align-self:end;
+  text-align:center;
+  font-size:.7rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:#e2e2e8;
+  text-shadow:0 1px 6px rgba(0,0,0,.6);
+}
+
+.cover-overlay.mini .cover-fsk {
+  grid-column:1;
+  grid-row:3;
+  width:48px;
+  height:48px;
+  border-radius:8px;
+  display:grid;
+  grid-template-rows:12px 1fr 12px;
+  align-items:center;
+  justify-items:center;
+  opacity:.8;
+  backdrop-filter:blur(2px);
+  box-shadow:0 3px 8px rgba(0,0,0,.3), inset 0 0 0 1px rgba(255,255,255,.1);
+}
+
+/* Farben übernehmen von den großen Badges */
+.cover-overlay.mini .cover-fsk[data-fsk="0"],
+.cover-overlay.mini .cover-fsk[data-fsk=""] {
+  background:linear-gradient(135deg, rgba(50,192,76,0.62), rgba(30,167,58,0.54)); color:#083b12;
+}
+.cover-overlay.mini .cover-fsk[data-fsk="6"]  { background:linear-gradient(135deg, rgba(255,230,80,0.62), rgba(245,200,40,0.54)); color:#3d2a00; }
+.cover-overlay.mini .cover-fsk[data-fsk="12"] { background:linear-gradient(135deg, rgba(60,120,255,0.62), rgba(30,80,200,0.54));  color:#001c66; }
+.cover-overlay.mini .cover-fsk[data-fsk="16"] { background:linear-gradient(135deg, rgba(140,90,255,0.62), rgba(110,60,200,0.54)); color:#1b003d; }
+.cover-overlay.mini .cover-fsk[data-fsk="18"] { background:linear-gradient(135deg, rgba(240,60,60,0.62), rgba(180,30,30,0.54));  color:#4d0000; }
+
+.cover-overlay.mini .fsk-top{font-size:.55rem;font-weight:700;opacity:.9;}
+.cover-overlay.mini .fsk-mid{font-size:1.2rem;line-height:1;font-weight:900;opacity:.9;}
+.cover-overlay.mini .fsk-bot{font-size:.5rem;font-weight:600;opacity:.9;}
 
 /* Trailer-Bereich optisch hervorheben */
 .film-trailer {
@@ -214,8 +345,4 @@
   border-radius: 0;
   box-shadow: none;
 }
-
-
-
-
 
