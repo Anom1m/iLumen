@@ -1,4 +1,4 @@
-// --- Dummy-Daten (Poster aktualisiert) ---
+// Dummy Daten 
 const MOVIES = [
   {
     id: 'm1',
@@ -105,11 +105,10 @@ const MOVIES = [
 try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
 
 // --- Schedules automatisch für jede Film-Instanz erzeugen (Datum + Uhrzeiten)
-// Ziel: jede Vorstellung an verschiedenen Tagen und zu verschiedenen Uhrzeiten
+// -> jede Vorstellung an verschiedenen Tagen und zu verschiedenen Uhrzeiten
 function generateSchedules(movies, days = 10) {
   const today = new Date();
   movies.forEach((m, idx) => {
-    // Ensure base times exist
     const baseTimes = Array.isArray(m.times) && m.times.length ? m.times.slice() : ['13:00','16:00','19:00'];
     m.schedule = [];
 
@@ -139,7 +138,7 @@ generateSchedules(MOVIES, 30);
 // Persist updated MOVIES (including generated schedule) so other pages / booking can read them
 try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
 
-// --- COMING SOON (nur für Slideshow) ---
+// nur für Slideshow---
 const COMING_SOON = [
   {
     id: 'u1',
