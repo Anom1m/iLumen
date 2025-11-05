@@ -135,10 +135,10 @@ function generateSchedules(movies, days = 10) {
 }
 
 generateSchedules(MOVIES, 30);
-// Persist updated MOVIES (including generated schedule) so other pages / booking can read them
+// zwischen Speicherung für Booking-Seite
 try { localStorage.setItem("MOVIES", JSON.stringify(MOVIES)); } catch(e){}
 
-// nur für Slideshow---
+// nur für Slideshow
 const COMING_SOON = [
   {
     id: 'u1',
@@ -177,8 +177,10 @@ const resultCount = document.getElementById('result-count');
 
 // Jahr im Footer
 document.getElementById('year').textContent = new Date().getFullYear();
+
 // Standard: kein voreingestelltes Datum – wenn Nutzer kein Datum wählt, zeigen wir alle Filme
 const todayISO = new Date().toISOString().slice(0,10);
+
 // leave date input empty by default so the page shows all movies until the user filters by date
 dateInp.value = '';
 
@@ -258,6 +260,8 @@ function render(){
     (!date || (m.schedule && m.schedule.some(s => s.date === date)))
   );
 
+
+
   // Now Playing
   filtered.forEach(m => grid.appendChild(createMovieCard(m)));
 
@@ -275,7 +279,7 @@ qInp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') render(); });
 dateInp.addEventListener('change', render);
 citySel.addEventListener('change', render);
 
-// Klick auf Spielzeit -> 🔸 Booking-Seite (Film, City, Datum übernehmen)
+// Klick auf Spielzeit -> Booking-Seite (Film, City, Datum übernehmen)
 showGrid.addEventListener('click', (e)=>{
   const btn = e.target.closest('.time');
   if(!btn || btn.disabled) return;
@@ -312,14 +316,12 @@ const heroTimeline = document.getElementById("hero-timeline");
 let currentSlide = 0;
 const intervalTime = 10000; // 10 Sekunden pro Banner
 
-// Slides + Timeline erstellen
+// Slides + Timeline 
 heroMovies.forEach((m, i) => {
   const slide = document.createElement("div");
   slide.className = "hero-slide" + (i === 0 ? " active" : "");
   slide.style.backgroundImage = `url('${m.poster}')`;
 
-  // Klick deaktiviert: Slides unter "Demnächst" sind jetzt nicht mehr verlinkt
-  // (früher: navigate to film.html on click)
 
   slidesContainer.appendChild(slide);
 

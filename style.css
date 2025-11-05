@@ -462,6 +462,7 @@ section{margin:28px 0}
   cursor: pointer;
   transition: background 0.3s ease;
 }
+
 .card .btn-info:hover {
   background: var(--accent-2);
 }
@@ -529,7 +530,7 @@ footer{
 }
 
 
-/* Logo im Header anpassen */
+/* Logo Header */
 .logo {
   height: 30px;        /* Höhe des Logos */
   width: auto;         /* Breite automatisch skalieren */
@@ -539,7 +540,7 @@ footer{
 
 /* Footer-Logo */
 .footer-logo-img {
-  height: 30px;           /* Größe anpassen */
+  height: 30px;           
   width: auto;
   object-fit: contain;
 }

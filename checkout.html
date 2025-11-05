@@ -11,10 +11,10 @@
   <!-- Header -->
   <header class="top">
     <div class="container nav">
-      <a class="brand" href="index.html" aria-label="Zur Startseite">
+      <a class="brand" href="index.html">
         <img src="images/2_ohne.png" alt="ILumen Logo" class="logo" />
       </a>
-      <nav class="navlinks" aria-label="Hauptnavigation">
+      <nav class="navlinks">
   <a href="index.html#now">Aktuell</a>
   <a href="index.html#showtimes">Spielzeiten</a>
   <a href="index.html#locations">Standorte</a>
@@ -29,6 +29,7 @@
     <p class="muted">Prüfe deine Buchung und wähle eine Zahlungsmethode.</p>
 
     <section class="checkout-grid">
+      
       <!-- Linke Spalte: Zahlung -->
       <form id="payForm" class="pay-card" novalidate>
         <h2>Zahlung</h2>
@@ -115,11 +116,11 @@
           <button type="submit" class="btn primary" id="payNow" disabled>Jetzt bezahlen</button>
         </div>
 
-        <div id="formError" class="form-error" role="alert" aria-live="polite"></div>
+        <div id="formError" class="form-error" role="alert"></div>
       </form>
 
       <!-- Rechte Spalte: Zusammenfassung -->
-      <aside class="summary-card" aria-labelledby="sumTitle">
+      <aside class="summary-card" >
         <h2 id="sumTitle">Zusammenfassung</h2>
 
         <div class="ticket-head">
@@ -154,7 +155,7 @@
     </section>
 
     <!-- Erfolgszustand -->
-    <section id="success" class="success hidden" aria-live="polite">
+    <section id="success" class="success hidden">
       <div class="success-card">
         <h2>Zahlung erfolgreich</h2>
         <p>Deine Buchung wurde bestätigt.</p>
