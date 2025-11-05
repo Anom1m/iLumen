@@ -1,9 +1,9 @@
-/* ===== Layout-Grundstruktur ===== */
+
 .booking {
   padding-bottom: 80px;
 }
 
-/* 2-Spalten-Layout: Sitzplätze links, Zusammenfassung rechts */
+/* 2-Spalten-Layout: Sitzplätze links Zusammenfassung rechts */
 .booking-layout{
   display:grid;
   grid-template-columns: minmax(0, 1fr) 360px;  /* linke Spalte flexibel, rechte fix */
@@ -33,6 +33,7 @@
   color: var(--accent);
   text-align: center;
 }
+
 .booking p {
   text-align: center;
   margin-bottom: 22px;
@@ -65,6 +66,7 @@
   display: grid;
   gap: 8px;
 }
+
 .seat-row {
   display: grid;
   grid-auto-flow: column;
@@ -83,10 +85,12 @@
   cursor: pointer;
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
+
 .seat:hover {
   transform: scale(1.08);
   box-shadow: 0 0 8px var(--accent-2);
 }
+
 .seat.selected {
   background: linear-gradient(135deg, #22c55e, #16a34a);
   border: 1px solid rgba(0,0,0,.25);
@@ -95,9 +99,11 @@
     0 0 0 2px rgba(34,197,94,.20),
     0 6px 18px rgba(34,197,94,.25);
 }
+
 .seat.selected:hover,
 .seat.selected:focus { filter: brightness(1.05); }
-/* Belegt: normale Plätze (grau gestreift) */
+
+/* Belegt: normale Plätze*/
 .seat.occupied:not(.premium) {
   background: repeating-linear-gradient(
     135deg,
@@ -115,7 +121,7 @@
   border: none !important; 
 }
 
-/* Belegt (normal) – kleines Quadrat, grau gestreift */
+/* Belegt (normal) grau gestreift */
 .legend-item.legend-occ .legend-box,
 .legend-box.legend-occ {
   width: 18px;
@@ -137,12 +143,13 @@
   border: 1px solid rgba(255,255,255,.22);
   box-shadow: 0 0 12px rgba(214,40,40,.7);
 }
+
 .seat.premium.selected {
   background:#ff4d4d;
   box-shadow:0 0 14px rgba(255,80,80,1);
 }
 
-/* Premium BELEGT – deutlich hervorgehoben */
+/* Premium BELEGT  */
 .seat.premium.occupied {
   background:
     repeating-linear-gradient(
@@ -168,7 +175,6 @@
   margin-right: 16px;
 }
 
-/* ===== Legende ===== */
 .legend {
   display: flex;
   justify-content: center;
@@ -195,7 +201,7 @@
 
 /* Ausgewählte Plätze Liste (unter "Ausgewählte Plätze") */
 .seat-list {
-  margin: 6px 0 0 0; /* verringere Abstand nach oben */
+  margin: 6px 0 0 0; 
   padding: 0;
   display:flex;
   gap:8px;
@@ -210,7 +216,6 @@
   font-weight: 600;
 }
 
-/* Für ein kompakteres Aussehen, falls du Punkte statt Marker möchtest, setze list-style: none und verwende ::before */
 
 /* Farben der Legende an Sitzfarben angepasst */
 .legend-free  .legend-box { background: var(--panel-2); }
@@ -218,10 +223,18 @@
   background: linear-gradient(135deg, #22c55e, #16a34a);
   border: 1px solid rgba(0,0,0,.25);
 }
-.legend-occ   .legend-box { background: #3a3a3a; opacity: .6; }
-.legend-prem  .legend-box { background: linear-gradient(145deg, #A4161A, #D62828); border-color: rgba(255,255,255,.3); }
 
-/* ===== Ticketkarte / Zusammenfassung rechts ===== */
+.legend-occ   .legend-box { 
+  background: #3a3a3a; 
+  opacity: .6; 
+}
+
+.legend-prem  .legend-box { 
+  background: linear-gradient(145deg, #A4161A, #D62828); 
+  border-color: rgba(255,255,255,.3); 
+}
+
+/* Zusammenfassung rechts  */
 .checkout-card {
   position: sticky;
   top: 16px;
@@ -235,8 +248,9 @@
 .ticket-head {
   display:flex;
   gap:12px;
-  align-items:flex-start; /* raise title next to poster */
+  align-items:flex-start; 
 }
+
 .ticket-cover {
   width:112px;
   height:160px;
@@ -245,12 +259,14 @@
   background:#111;
   border:1px solid rgba(255,255,255,.06);
 }
+
 .ticket-cover img {
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
 }
+
 .ticket-info { display:grid; gap:4px; }
 .ticket-title { font-weight:700; margin-top: -6px; }
 .ticket-meta { color:var(--muted); font-size:.92rem; }
@@ -268,7 +284,7 @@
   gap:12px;
 }
 
-/* Make the "Ausgewählte Plätze" label white and bold */
+/* Schrift ausgewählte Plätze weißß und dick */
 .selection-row .muted {
   color: #fff;
   font-weight: 700;
@@ -280,6 +296,7 @@
   color:var(--muted);
   padding:6px 0;
 }
+
 .toggle-3d input[type="checkbox"] {
   accent-color: var(--accent);
 }
@@ -289,12 +306,18 @@
   .selection { margin-top: 0; }
 }
 
-.price-block { display:grid; gap:8px; }
+.price-block {
+  display:grid; 
+  gap:8px; 
+}
+
+
 .price-row {
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
+
 .price-row.total strong {
   font-size:1.18rem;
   color: var(--accent-2);
@@ -313,7 +336,7 @@
   cursor: pointer;
   transition: background .25s ease;
 }
+
 .btn.primary:hover {
   background: var(--accent-2);
 }
-

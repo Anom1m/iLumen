@@ -175,3 +175,6 @@ document.getElementById('payForm').addEventListener('submit', e=>{
   document.querySelector('.checkout-grid').style.display = 'none';
   document.getElementById('success').classList.remove('hidden');
 });
+
+// Text "Prüfe deine Buchung..." ausblenden, sobald Erfolg angezeigt wird
+document.querySelector('.checkout .muted')?.remove();
