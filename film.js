@@ -64,7 +64,7 @@ function renderTrailer(movie) {
 const MOVIES = [
   {
     id: 'm1',
-    title: 'Neon Nights',
+    title: 'Dark Nights',
     rating: 'FSK 12',
     dur: 122,
     formats: ['2D', 'OV'],

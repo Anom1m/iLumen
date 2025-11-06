@@ -318,11 +318,12 @@ section{margin:28px 0}
 
 .muted{color:var(--muted)}
 
-/* Movie grid */
+/* Filmposter etc. */
+
 .grid{
   display:grid; 
   grid-template-columns:repeat(5,minmax(0,1fr)); 
-  gap:14px}
+  gap:14px;}
 
 @media (max-width:1200px){.grid{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -372,6 +373,8 @@ section{margin:28px 0}
   background:rgba(164,22,26,.1); 
   color:var(--accent);
 }
+
+/*Spielzeiten*/
 
 .times{
   display:flex; 

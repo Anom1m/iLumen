@@ -99,15 +99,18 @@
 
 
     <!-- Spielzeiten -->
+    <!-- Überschrift & Untertitel -->
     <section class="container" id="times">
       <div class="section-head">
         <h2>Spielzeiten</h2>
         <span class="muted">Wähle deinen Standort</span>
       </div>
 
+      <!-- Filterbereich (mit Standort, Datum & Button) -->
       <div class="filters local">
-        <div class="field">
+        <div class="field"> 
           <span class="muted">📍</span>
+          <!-- Dropdown-Menü -->
           <select id="city">
             <option value="">Alle Standorte</option>
             <option>Berlin</option>
@@ -117,15 +120,17 @@
             <option>Dresden</option>
           </select>
         </div>
+        <!-- Kalenderfeld -->
         <div class="field">
           <span class="muted">📅</span>
           <input type="date" id="date" />
         </div>
+        <!-- Filter-Button -->
         <div class="field action">
           <button class="btn primary" id="apply">Filtern</button>
         </div>
       </div>
-
+      <!-- Ergebnisbereich (wird per Js gefüllt) -->
       <div class="grid" id="showtime-grid"></div>
     </section>
   </main>
