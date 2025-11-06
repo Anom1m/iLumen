@@ -22,42 +22,41 @@ function safeLoadImg(imgEl, src) {
   );
 }
 
-
+//----TRAILER----
 function renderTrailer(movie) {
+  // Hole den Container, in dem der Trailer angezeigt werden soll
   const container = qs('#trailer-video-container');
-  container.innerHTML = ''; // vorher leeren
 
+  //Leere den Container, um vorherige Inhalte zu entfernen
+  container.innerHTML = '';
+
+  //Wenn kein Trailer vorhanden ist, zeige einen Hinweistext
   if (!movie.trailer) {
     container.innerHTML = '<p class="muted">Kein Trailer verfügbar.</p>';
     return;
   }
 
+  //Bereinige den Trailer-Link
+  const src = movie.trailer.trim();
 
-  // Bereinige die URL: HTML-Entities entfernen und ggf. in Embed-Form bringen
-  let src = String(movie.trailer || '').replace(/&amp;/g, '&').trim();
+  //Erstelle ein <video>-Element mit Steuerung und Posterbild
+  const video = document.createElement('video');
+  video.setAttribute('controls', ''); //Benutzer kann Video steuern (Play, Pause etc.)
+  video.setAttribute('width', '100%'); //Video passt sich der Containerbreite an
+  video.setAttribute('title', `Trailer zu ${movie.title}`); //Barrierefreiheit: Titel für Screenreader
+  video.setAttribute('poster', movie.poster || ''); //Vorschaubild
+  video.loading = 'lazy'; // Video wird erst geladen, wenn nötig
 
-  // Wenn ein normaler YouTube-Watch-Link übergeben wurde, in das embed-Format konvertieren
-  const watchMatch = src.match(/[?&]v=([A-Za-z0-9_-]{11})/);
-  if (watchMatch) {
-    const id = watchMatch[1];
-    src = `https://www.youtube-nocookie.com/embed/${id}`;
-  }
+  //Erstelle die <source>-Angabe für das Video (.mp4 vorausgesetzt)
+  const source = document.createElement('source');
+  source.src = src;
+  source.type = 'video/mp4';
 
-  // (removed origin param injection — can trigger embed blocks in some environments)
+  //Füge die Quelle dem Video hinzu
+  video.appendChild(source);
 
-  const iframe = document.createElement('iframe');
-  iframe.width = '560';
-  iframe.height = '315';
-  iframe.src = src;
-  iframe.title = `Trailer zu ${movie.title}`;
-  iframe.setAttribute('frameborder', '0');
-  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-  iframe.setAttribute('allowfullscreen', '');
-  // avoid forcing a referrer policy that may interfere with embedding
-  iframe.loading = 'lazy';
-
-  // Direktes Einfügen des iframes (kein wrapper / fallback)
-  container.appendChild(iframe);
+  //Füge das fertige Video dem Container hinzu
+  container.appendChild(video);
 }
 
 
@@ -84,7 +83,8 @@ const MOVIES = [
     cities: ['Berlin', 'Hamburg', 'München'],
     times: ['12:30', '15:15', '18:00', '20:45'],
     soldOut: ['18:00'],
-    trailer: 'https://www.youtube-nocookie.com/embed/29BW2Zkqr3A?si=EDjsV4syINKFnFuC'
+    trailer: 'trailer/trailer1.mp4'
+
   },
   {
     id: 'm2',
@@ -104,7 +104,7 @@ const MOVIES = [
     cities: ['Berlin', 'Hamburg'],
     times: ['13:00', '16:00', '19:30'],
     soldOut: [],
-    trailer: 'https://www.youtube-nocookie.com/embed/k9bUTfFF3_4?si=5xaP-EyBJ17y_IoI'
+
   },
   {
     id: 'm3',
@@ -124,7 +124,7 @@ const MOVIES = [
     cities: ['Hamburg', 'München'],
     times: ['14:00', '17:00', '20:00', '22:30'],
     soldOut: ['20:00', '22:30'],
-    trailer: 'https://www.youtube-nocookie.com/embed/S9uTScSgzrM?si=8nVFsLnGdYJoYbUP&amp;start=60'
+    trailer: 'trailer/trailer1.mp4'
   },
   {
     id: 'm4',
@@ -143,8 +143,7 @@ const MOVIES = [
     cities: ['Berlin', 'Dresden', 'Frankfurt'],
     times: ['11:00', '13:30', '16:15'],
     soldOut: [],
-    trailer: 'https://www.youtube-nocookie.com/embed/S9uTScSgzrM?si=8nVFsLnGdYJoYbUP&amp;start=60'
-
+    trailer: 'trailer/trailer3.mp4'
   },
   {
     id: 'm5',
@@ -163,8 +162,7 @@ const MOVIES = [
     cities: ['Frankfurt', 'Hamburg', 'München'],
     times: ['15:45', '19:00', '21:45'],
     soldOut: ['21:45'],
-    trailer: 'https://www.youtube-nocookie.com/embed/_P5vR9pz5Hc?si=LP_HlnFyARCi06HE'
-
+    trailer: 'trailer/trailer2.mp4'
   },
   {
     id: 'm6',
@@ -184,7 +182,7 @@ const MOVIES = [
     cities: ['Berlin', 'Hamburg', 'München'],
     times: ['17:00', '20:00', '22:45'],
     soldOut: ['22:45'],
-    trailer: 'https://www.youtube-nocookie.com/embed/1oOBjyOKu2o?si=mb4aL6eiKRbVgPa0'
+    trailer: 'trailer/trailer1.mp4'
   },
   {
     id: 'm7',
@@ -204,7 +202,7 @@ const MOVIES = [
     cities: ['Frankfurt', 'Dresden'],
     times: ['14:30', '18:15', '21:00'],
     soldOut: [],
-    trailer: 'https://www.youtube-nocookie.com/embed/CID-sYQNCew?si=u7_MuxL5A_xJMCG9'
+    trailer: 'trailer/trailer3.mp4'
   },
   {
     id: 'm8',
@@ -224,7 +222,7 @@ const MOVIES = [
     cities: ['Hamburg', 'Berlin', 'Frankfurt'],
     times: ['12:00', '15:00', '18:00'],
     soldOut: [],
-    trailer: 'https://www.youtube-nocookie.com/embed/bRPQmaFQiwM?si=7e2E5wZY91H3VZ8M'
+    trailer: 'trailer/trailer3.mp4'
   },
   {
     id: 'm9',
@@ -243,7 +241,7 @@ const MOVIES = [
     cities: ['München', 'Berlin'],
     times: ['19:00', '21:45', '23:59'],
     soldOut: ['23:59'],
-    trailer: 'https://www.youtube-nocookie.com/embed/uAZFK3fXp4A?si=fLNyiTzV66OhFVnW'
+    trailer: 'trailer/trailer2.mp4'
   },
   {
     id: 'm10',
@@ -262,7 +260,7 @@ const MOVIES = [
     cities: ['Dresden', 'Frankfurt', 'Hamburg'],
     times: ['13:15', '16:00', '19:00'],
     soldOut: [],
-    trailer: 'https://www.youtube-nocookie.com/embed/cTlHQiRNVl0?si=TsfOQKkcLrAuEGMD'
+    trailer: 'trailer/trailer2.mp4'
   }
 ];
 
@@ -315,25 +313,31 @@ renderTrailer(film);
   qs('#fact-format').textContent = film.formats?.length ? film.formats.join(' / ') : '2D';
 
 
-  const trailerBtn = qs('#trailer-btn');
-  if (film.trailer) {
-    trailerBtn.href = film.trailer;
-    trailerBtn.textContent = 'Zum Trailer';
-  } else {
-    trailerBtn.classList.add('muted');
-    trailerBtn.textContent = 'Kein Trailer verfügbar';
-    trailerBtn.removeAttribute('href');
-  }
+//----"TRAILER ANSEHEN" KNOPF----
+const trailerBtn = qs('#trailer-btn');
 
-// Sanftes Scrollen zum Trailer-Bereich
-trailerBtn.addEventListener('click', (e) => {
-  e.preventDefault(); // Verhindert direktes Springen
+//Prüfe, ob ein Trailer für den Film vorhanden ist
+if (film.trailer) {
+  // Button vorbereiten, wenn ein Trailer verfügbar ist
+  trailerBtn.textContent = 'Trailer ansehen';
+  trailerBtn.classList.remove('muted');             //"muted"-Stil entfernen
+  trailerBtn.removeAttribute('href');               //Entfernt eventuelles href, um falsche Navigation zu vermeiden
 
-  const target = qs('#trailer');
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth' });
-  }
-});
+  //Scroll-Verhalten aktivieren: Beim Klick wird sanft zum Trailer-Bereich gescrollt
+  trailerBtn.addEventListener('click', (e) => {
+    e.preventDefault();                             //Verhindert das Standardverhalten
+    const target = qs('#trailer');                  //Zielbereich für Trailer
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' }); //Sanftes Scrollen zum Trailer
+    }
+  });
+} else {
+  //Kein Trailer vorhanden: Button entsprechend deaktivieren oder visuell abschwächen
+  trailerBtn.textContent = 'Kein Trailer verfügbar';
+  trailerBtn.classList.add('muted');                 //Stil für deaktivierten Zustand hinzufügen
+  trailerBtn.style.display = 'none';                 //Button komplett verstecken
+}
+
 
 
   // Cast

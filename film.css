@@ -159,14 +159,14 @@
   box-shadow: 0 8px 20px rgba(0,0,0,.35);
 }
 
-/* Credits: Look unverändert, Platzierung neben dem Badge (rechts), sonst darunter */
+/* Credits */
 .cover-credits{
   grid-column: 2;            /* rechte Spalte neben dem Badge */
   grid-row: 3;               /* Fuß-Zeile */
   justify-self: center;
   align-self: end;
 
-  /* --- dein ursprünglicher Look --- */
+
   margin: 0 10px 10px 10px;
   font-size: .65rem;
   letter-spacing: .18em;
